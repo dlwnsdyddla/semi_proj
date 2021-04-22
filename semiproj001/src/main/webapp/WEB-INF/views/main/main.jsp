@@ -6,10 +6,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>KOD;NG</title>
 <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 </head>
 <body>
+<div class="header">
+    <jsp:include page="/WEB-INF/views/layout/header.jsp"></jsp:include>
+</div>
 
 <div>
 	<c:if test="${not empty sessionScope.member}">
@@ -25,7 +28,17 @@
 	</p>
 </div>
 
+<div class="container">
+    <div class="body-container" style="width: 700px;">
+        <div style="padding-top: 15px;">
+            메인 화면 입니다.
+        </div>
+    </div>
+</div>
 
+<div class="footer">
+    <jsp:include page="/WEB-INF/views/layout/footer.jsp"></jsp:include>
+</div>
 
 </body>
 </html>
