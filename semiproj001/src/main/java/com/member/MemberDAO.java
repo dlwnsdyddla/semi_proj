@@ -59,6 +59,132 @@ public class MemberDAO {
 		return dto;
 	}
 	
+	/**
+	 * member 테이블에 정보 추가 (insert문)
+	 * @param dto
+	 * @return int
+	 * @throws SQLException
+	 */
+	public int insertMember(MemberDTO dto) throws SQLException {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql;
+		
+		try {
+			conn.setAutoCommit(false);
+			
+			sql = "INSERT INTO member(id, pwd, type, member_name, registered, changed, resigned) VALUES (?, ?, ?, ?, SYSDATE, SYSDATE, '')";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, dto.getId());
+			pstmt.setString(2, dto.getPwd());
+			pstmt.setString(3, dto.getType());
+			pstmt.setString(4, dto.getMember_name());
+
+			result = pstmt.executeUpdate();
+			conn.commit();
+			
+		} catch (SQLException e) {
+			try {
+				conn.rollback();
+			} catch (SQLException e2) {
+			}
+			e.printStackTrace();
+			throw e;
+		} finally {
+			if(pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e2) {
+				}
+			}
+		}
+		
+		return result;
+	}
+	
+	/**
+	 * member 테이블에 정보 수정 (update문)
+	 * @param dto
+	 * @return int
+	 * @throws SQLException
+	 */
+	public int updateMember(MemberDTO dto) throws SQLException {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql;
+		
+		try {
+			conn.setAutoCommit(false);
+			
+			sql = "UPDATE member SET pwd=? WHERE id=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, dto.getPwd());
+			pstmt.setString(2, dto.getId());
+			
+			result = pstmt.executeUpdate();
+			conn.commit();
+			
+		} catch (SQLException e) {
+			try {
+				conn.rollback();
+			} catch (SQLException e2) {
+			}
+			e.printStackTrace();
+			throw e;
+		} finally {
+			if(pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e2) {
+				}
+			}
+		}
+		
+		return result;
+	}
+	
+	/**
+	 * "id" 값으로 검색해 정보가 있으면
+	 * type -> d 로 변경하고
+	 * resigned -> SYSDATE 로 변경하여
+	 * 탈퇴처리 (update문)
+	 * @param id
+	 * @return int
+	 * @throws SQLException
+	 */
+	public int deleteMember(String id) throws SQLException {
+		int result=0;
+		PreparedStatement pstmt=null;
+		String sql;
+		
+		try {
+			conn.setAutoCommit(false);
+			
+			sql="UPDATE member SET type='d', resigned=SYSDATE WHERE id=?";
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			
+			result = pstmt.executeUpdate();
+			conn.commit();
+			
+		} catch (SQLException e) {
+			try {
+				conn.rollback();
+			} catch (SQLException e2) {
+			}
+			e.printStackTrace();
+			throw e;
+		} finally {
+			if(pstmt!=null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+				}
+			}
+		}
+		
+		return result;
+	}
 	
 
 }

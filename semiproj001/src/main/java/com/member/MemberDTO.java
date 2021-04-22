@@ -5,7 +5,7 @@ public class MemberDTO {
 	private String id;			// 아이디
 	private String pwd;			// 패스워드
 	private String member_name;	// 이름
-	private String type;		// 유저 롤 -> 학생:s, 강사:t, 관리자:a
+	private String type;		// 유저 롤 -> 학생:s, 강사:t, 관리자:a, 탈퇴회원:d
 	private String registered;	// 가입일자
 	private String changed;		// 정보 수정일자
 	private String resigned;	// 회원탈퇴일
