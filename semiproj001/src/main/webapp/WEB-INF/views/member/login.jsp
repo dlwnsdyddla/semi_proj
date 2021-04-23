@@ -29,5 +29,17 @@ function login() {
 	</form>
 </div>
 
+<div class="container">
+     <section class="login-clean" style="background: rgb(241, 247, 252);">
+        <form method="post">
+            <h2 class="sr-only">Login Form</h2>
+            <div class="illustration"><i class="icon ion-ios-navigate" style="color: #07689f;"></i></div>
+            <div class="form-group"><input class="form-control" type="text" placeholder="아이디"></div>
+            <div class="form-group"><input class="form-control" type="password" name="password" placeholder="비밀번호"></div>
+            <div class="form-group"><button class="btn btn-primary btn-block" type="submit" style="background: #07689f;">로그인</button></div>
+        </form>
+    </section>
+</div>
+
 </body>
 </html>
