@@ -21,22 +21,10 @@
     <jsp:include page="/WEB-INF/views/layout/header.jsp"></jsp:include>
 </div>
 
-<div>
-	<c:if test="${not empty sessionScope.member}">
-	<p>유저명 : ${sessionScope.member.member_name}</p>
-	<p>타입 : ${sessionScope.member.type}</p>
-	</c:if>
-</div>
+
 
 <div class="container">
     <div class="body-container" style="width: 700px; padding-top: 40px;">
-	<div>
-		<p>
-			<a href="${pageContext.request.contextPath}/member/login.do "> 로그인 </a>
-			&nbsp;&nbsp;
-			<a href="${pageContext.request.contextPath}/member/logout.do "> 로그아웃 </a>
-		</p>
-	</div>
         <div style="padding-top: 15px;">
             메인 화면 입니다.
         </div>

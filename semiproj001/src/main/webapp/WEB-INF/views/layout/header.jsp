@@ -31,7 +31,21 @@
                     </ul>
                     <form class="form-inline mr-auto" target="_self">
                         <div class="form-group mb-0"><label for="search-field"><i class="fa fa-search"></i></label><input class="form-control search-field" type="search" id="search-field" name="search"></div>
-                    </form><span class="navbar-text"> <a class="login" href="index.html">로그인</a></span><a class="btn btn-light action-button" role="button" href="#">회원가입</a>
+                    </form>
+                    <c:choose>
+                    	<c:when test="${empty sessionScope.member}">
+                    		  <span class="navbar-text"><a class="login" href="${pageContext.request.contextPath}/member/login.do">로그인</a></span><a class="btn btn-light action-button" role="button" href="#">회원가입</a>
+                    	</c:when>
+                    	<c:otherwise>
+                    		 <span class="navbar-text"> ${sessionScope.member.member_name} </span> &nbsp;
+                    		<c:choose>
+                    			<c:when test="${sessionScope.member.type == 's'}"> <span class="navbar-text"> 학생님 </span>&nbsp;&nbsp; </c:when>
+                    			<c:when test="${sessionScope.member.type == 't'}"> <span class="navbar-text"> 강사님 </span>&nbsp;&nbsp; </c:when>
+                    			<c:when test="${sessionScope.member.type == 'a'}"> <span class="navbar-text"> 님 </span>&nbsp;&nbsp; </c:when>
+                    		</c:choose> 
+                    		<a class="btn btn-light action-button" role="button" href="${pageContext.request.contextPath}/member/logout.do">로그아웃</a>
+                    	</c:otherwise>
+                    </c:choose>  
                 </div>
             </div>
         </nav>
