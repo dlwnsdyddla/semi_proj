@@ -109,7 +109,7 @@ $(function(){
             <a href="#">마이페이지</a>
             <ul>
                 <li><a href="#" style="margin-left:230px; " onmouseover="this.style.marginLeft='150px';">내정보관리</a></li>
-                <li><a href="#">강의관리</a></li>
+                <li><a href="#">강의 관리</a></li>
                 <li><a href="#">캘린더</a></li>
             </ul>
         </li>
