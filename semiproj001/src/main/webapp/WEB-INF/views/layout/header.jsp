@@ -71,7 +71,7 @@ $(function(){
         <li>
             <a href="#">학습하기</a>
             <ul>
-                <li><a href="#"">강의목록</a></li>
+                <li><a href="#">강의목록</a></li>
             </ul>
         </li>
         

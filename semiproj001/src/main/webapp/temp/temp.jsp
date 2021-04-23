@@ -98,7 +98,7 @@
     <section class="testimonials-clean">
         <div class="container">
             <div class="intro">
-                <h2 class="text-center">후기가 증명한 KODING</h2>
+                <h2 class="text-center">후기가 증명한 KOD;NG</h2>
                 <p class="text-center">이미 많은 사람들이 증명했어요!<br>&nbsp; 여러분도 도전하시고 결과물을 얻어가세요!</p>
             </div>
             <div class="row people">
@@ -139,7 +139,7 @@
                     <h3>KOD;NG</h3>
                     <ul>
                         <li><a href="#">홈</a></li>
-                        <li><a href="#">쌍용교육센터</a></li>
+                        <li><a href="#">KOD;NG교육센터</a></li>
                         <li><a href="#"></a></li>
                     </ul>
                 </div>
