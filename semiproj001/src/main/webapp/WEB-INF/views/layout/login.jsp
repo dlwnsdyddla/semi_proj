@@ -7,14 +7,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>spring</title>
+<title>login</title>
 
 </head>
 <body>
-
+<header class="header-blue">
 <div class="header">
     <jsp:include page="/temp/header.jsp"></jsp:include>
 </div>
+</header>
 	
 <div class="container">
      <section class="login-clean" style="background: rgb(241, 247, 252);">

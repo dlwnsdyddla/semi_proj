@@ -3,12 +3,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="icon" href="data:;base64,iVBORw0KGgo=">
-
+<title>login</title>
+<jsp:include page="/WEB-INF/views/layout/staticHeader.jsp"/>
 <script type="text/javascript">
 function login() {
 	var f = document.loginForm;
@@ -20,7 +19,13 @@ function login() {
 
 </head>
 <body>
+<div class="header">
+    <jsp:include page="/WEB-INF/views/layout/header.jsp"></jsp:include>
+</div>
 
+<!-- 준용씨가 처음작성하신거 -->
+<div class="container">
+     <section class="login-clean" style="background: rgb(241, 247, 252);">
 <div>
 	<form name="loginForm" method="post">
 		<p> id : <input type="text" name="id"> </p>
@@ -28,7 +33,10 @@ function login() {
 		<button type="button" onclick="login();"> 로그인 </button> ${message}
 	</form>
 </div>
+</section>
 
+<!-- 디자인폼 참고용 -->
+<br>
 <div class="container">
      <section class="login-clean" style="background: rgb(241, 247, 252);">
         <form method="post">
@@ -41,5 +49,10 @@ function login() {
     </section>
 </div>
 
+</div>
+<div class="footer">
+    <jsp:include page="/WEB-INF/views/layout/footer.jsp"></jsp:include>
+</div>
+<jsp:include page="/WEB-INF/views/layout/staticFooter.jsp"/>
 </body>
 </html>
