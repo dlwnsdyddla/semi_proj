@@ -22,7 +22,7 @@
                     <h3>KOD;NG</h3>
                     <ul>
                         <li><a href="#">홈</a></li>
-                        <li><a href="#">KOD;NG교육센터</a></li>
+                        <li><a href="#">쌍용교육센터</a></li>
                         <li><a href="#"></a></li>
                     </ul>
                 </div>

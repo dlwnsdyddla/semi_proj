@@ -17,7 +17,7 @@
 </div>
 	
 <div class="container">
-    <div class="body-container" style="width: 700px; padding-top: 40px;">
+    <div class="body-container" style="width: 700px;">
         <div class="body-title">
             <h3><i class="fas fa-chalkboard"></i> 제목 </h3>
         
@@ -31,7 +31,7 @@
 </div>
 
 <div class="footer">
-    <jsp:include page="/WEB-INF/views/layout/header.jsp"></jsp:include>
+    <jsp:include page="/WEB-INF/views/layout/footer.jsp"></jsp:include>
 </div>
 
 </body>
