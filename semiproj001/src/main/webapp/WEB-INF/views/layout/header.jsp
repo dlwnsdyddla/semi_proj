@@ -114,7 +114,6 @@ $(function(){
             </ul>
         </li>
         </c:if>
-			
     </ul>      
 </div>
 <div class="navigation">
