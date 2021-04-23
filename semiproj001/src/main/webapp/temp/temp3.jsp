@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8">
     <title>KOD;NG</title>
-	<jsp:include page="/WEB-INF/views/layout/staticHeader.jsp"/>
+<jsp:include page="/WEB-INF/views/layout/staticHeader.jsp"/>
 </head>
 
 <body>

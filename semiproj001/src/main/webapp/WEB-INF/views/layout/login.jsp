@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>login</title>
-
+<jsp:include page="/WEB-INF/views/layout/staticHeader.jsp"/>
 </head>
 <body>
 <header class="header-blue">
@@ -32,6 +32,6 @@
 <div class="footer">
     <jsp:include page="/temp/footer.jsp"></jsp:include>
 </div>
-
+<jsp:include page="/WEB-INF/views/layout/staticFooter.jsp"/>
 </body>
 </html>

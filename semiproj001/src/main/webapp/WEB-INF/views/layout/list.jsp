@@ -9,7 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <title>list</title>
-
+<jsp:include page="/WEB-INF/views/layout/staticHeader.jsp"/>
 </head>
 <body>
 	<div class="header">
@@ -40,6 +40,6 @@
 <div class="footer">
     <jsp:include page="/temp/footer.jsp"></jsp:include>
 </div>
-
+<jsp:include page="/WEB-INF/views/layout/staticFooter.jsp"/>
 </body>
 </html>
