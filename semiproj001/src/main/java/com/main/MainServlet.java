@@ -34,7 +34,7 @@ public class MainServlet  extends  HttpServlet {
 		String uri = req.getRequestURI();
 		
 		if(uri.indexOf("main.do")!=-1) {
-			forward(req, resp, "/WEB-INF/views/main/main.jsp"); // # -> 메인화면의 경로를 작성...
+			forward(req, resp, "/WEB-INF/views/main/main2.jsp"); // # -> 메인화면의 경로를 작성...
 		}
 		
 	}
