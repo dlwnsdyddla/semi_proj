@@ -57,12 +57,12 @@
             </div>
             <div class="row people">
                 <div class="col-md-6 col-lg-4 item">
-                    <div class="box" style="height: 511px;"><img class="rounded-circle" src="assets/img/1024px-PyCharm_Logo.svg_.png">
+                    <div class="box"><img class="rounded-circle" src="assets/img/1024px-PyCharm_Logo.svg_.png">
                         <h3 class="name">웹개발 종합반</h3>
                         <p class="title">초급자</p>
                         <ul>
                             <li style="text-align: left;">코딩을 전혀 모르시거나 조금 배워보신 분 대상</li>
-                            <li style="text-align: left;">나만의 웹서비스 만들고 출시까지</li>
+                            <li style="text-align: left;">나만의 웹서비스를 만들고 출시까지 한번에 도전!</li>
                             <li style="text-align: left;">코딩 왕초보 탈출!</li>
                         </ul>
                         <div class="social"><a href="#"><i class="fa fa-facebook-official"></i></a><a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-instagram"></i></a></div>
@@ -104,7 +104,7 @@
             <div class="row people">
                 <div class="col-md-6 col-lg-4 item">
                     <div class="box">
-                        <p class="description">초등학교 때부터 미술만 해서 컴퓨터랑은 거의 담쌓고 살았는데 주변에서 이렇게 단기간에 웹사이트를 만들 줄 몰랐어요<br></p>
+                        <p class="description">초등학교 때부터 미술만 해서 컴퓨터랑은 거의 담쌓고 살았는데 주변에서 이렇게 단기간에 웹사이트를 만들 줄 몰랐어요.<br></p>
                     </div>
                     <div class="author"><img class="rounded-circle" src="assets/img/1.jpg">
                         <h5 class="name">최재환</h5>
@@ -122,7 +122,7 @@
                 </div>
                 <div class="col-md-6 col-lg-4 item">
                     <div class="box">
-                        <p class="description">간단하지만 하나의 사이클을 배울 수 있는 곳은 KODING이 처음이었거든요. 홈페이지나 웹이나 앱에 관심있으신 분들에게 정말 강추하고 싶습니다.</p>
+                        <p class="description">간단하지만 하나의 사이클을 배울 수 있는 곳은 KODING이 처음이었거든요. 홈페이지나 웹이나 앱에 관심있으신 분들에게 강추하고 싶어요.</p>
                     </div>
                     <div class="author"><img class="rounded-circle" src="assets/img/2.jpg">
                         <h5 class="name">우혜진</h5>
