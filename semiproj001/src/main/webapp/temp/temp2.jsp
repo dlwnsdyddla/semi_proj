@@ -35,7 +35,17 @@
                 </div>
             </div>
         </nav>
-    </header>    
+    </header> 
+    
+    <div class="container">
+    <br>
+    <br>
+    메인내용입니다..
+    <br>
+    <br>
+    
+    </div>
+       
     <footer class="footer-clean">
         <div class="container">
             <div class="row justify-content-center">
