@@ -111,7 +111,7 @@
                     </div>
                     <div class="author"><img class="rounded-circle" src="temp/assets/img/2.jpg">
                         <h5 class="name">우혜진</h5>
-                        <p class="title">최강 조장</p>
+                        <p class="title">코딩 조장</p>
                     </div>
                 </div>
             </div>
