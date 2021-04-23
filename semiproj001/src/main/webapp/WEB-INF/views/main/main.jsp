@@ -8,8 +8,13 @@
 <meta charset="UTF-8">
 <title>KOD;NG</title>
 <link rel="icon" href="data:;base64,iVBORw0KGgo=">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resource/css/style.css" type="text/css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resource/css/layout.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/temp/assets/bootstrap/css/bootstrap.min.css" type="text/css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/temp/assets/fonts/font-awesome.min.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/temp/assets/fonts/ionicons.min.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/temp/assets/css/styles.min.css" type="text/css">
+
+
 </head>
 <body>
 <div class="header">
@@ -22,16 +27,16 @@
 	<p>타입 : ${sessionScope.member.type}</p>
 	</c:if>
 </div>
-<div>
-	<p>
-		<a href="${pageContext.request.contextPath}/member/login.do "> 로그인 </a>
-		&nbsp;&nbsp;
-		<a href="${pageContext.request.contextPath}/member/logout.do "> 로그아웃 </a>
-	</p>
-</div>
 
 <div class="container">
-    <div class="body-container" style="width: 700px;">
+    <div class="body-container" style="width: 700px; padding-top: 40px;">
+	<div>
+		<p>
+			<a href="${pageContext.request.contextPath}/member/login.do "> 로그인 </a>
+			&nbsp;&nbsp;
+			<a href="${pageContext.request.contextPath}/member/logout.do "> 로그아웃 </a>
+		</p>
+	</div>
         <div style="padding-top: 15px;">
             메인 화면 입니다.
         </div>
