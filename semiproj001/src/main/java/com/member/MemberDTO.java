@@ -9,6 +9,7 @@ public class MemberDTO {
 	private String registered;	// 가입일자
 	private String changed;		// 정보 수정일자
 	private String resigned;	// 회원탈퇴일
+	private String member_picture_filename; // 프로필사진 저장이름
 	
 	public String getId() {
 		return id;
@@ -51,6 +52,12 @@ public class MemberDTO {
 	}
 	public void setResigned(String resigned) {
 		this.resigned = resigned;
+	}
+	public String getMember_picture_filename() {
+		return member_picture_filename;
+	}
+	public void setMember_picture_filename(String member_picture_filename) {
+		this.member_picture_filename = member_picture_filename;
 	}
 	
 }

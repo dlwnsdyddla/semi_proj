@@ -1,18 +1,26 @@
 package com.member;
 
+import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
+import com.util.MyUploadServlet;
+
+@MultipartConfig
 @WebServlet("/member/*")
-public class MemberServlet extends HttpServlet {
+public class MemberServlet extends MyUploadServlet {
 	private static final long serialVersionUID = 1L;
+	private String pathname;
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -34,6 +42,11 @@ public class MemberServlet extends HttpServlet {
 		req.setCharacterEncoding("utf-8");
 		String uri = req.getRequestURI();
 		
+		HttpSession session=req.getSession();
+		// 이미지를 저장할 경로(pathname)
+		String root=session.getServletContext().getRealPath("/");
+		pathname=root+"uploads"+File.separator+"memberImages";
+		
 		if(uri.indexOf("login.do")!=-1) {
 			loginForm(req, resp);
 		} else if(uri.indexOf("login_ok.do")!=-1) {
@@ -44,10 +57,10 @@ public class MemberServlet extends HttpServlet {
 			memberForm(req, resp);
 		} else if(uri.indexOf("member_ok.do")!=-1) {
 			memberSubmit(req, resp);
-		} else if(uri.indexOf("pwd.do")!=-1) {
-			pwdForm(req, resp);
-		} else if(uri.indexOf("pwd_ok.do")!=-1) {
-			pwdSubmit(req, resp);
+		} else if(uri.indexOf("changePwd.do")!=-1) {
+			changePwdForm(req, resp);
+		} else if(uri.indexOf("changePwd_ok.do")!=-1) {
+			changePwdSubmit(req, resp);
 		} else if(uri.indexOf("update_ok.do")!=-1) {
 			updateSubmit(req, resp);
 		} else if(uri.indexOf("userIdCheck.do")!=-1) {
@@ -115,19 +128,74 @@ public class MemberServlet extends HttpServlet {
 	}
 	
 	private void memberForm(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+		forward(req, resp, "/WEB-INF/views/member/signup.jsp");
 	}
 
 	private void memberSubmit(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+		MemberDAO dao = new MemberDAO();
+		String message;
+		
+		try {
+			MemberDTO dto = new MemberDTO();
+			dto.setId(req.getParameter("id"));
+			dto.setPwd(req.getParameter("pwd"));
+			dto.setMember_name(req.getParameter("member_name"));
+			dto.setType(req.getParameter("type"));
+			
+			String filename=null;
+			Part p = req.getPart("member_picture_filename");
+			Map<String, String> map = doFileUpload(p, pathname);
+			if(map != null) {
+				filename = map.get("saveFilename");
+			}
+			dto.setMember_picture_filename(filename);
+			
+			dao.insertMember(dto);
+			
+			String cp=req.getContextPath();
+			resp.sendRedirect(cp);
+			return;
+		} catch (SQLException e) {
+			if(e.getErrorCode()==1)
+				message = "중복된 아이디입니다.";
+			else
+				message = "회원 가입 실패.";
+		} catch (Exception e) {
+			message = "회원 가입 실패.";
+			e.printStackTrace();
+		}
+		
+		req.setAttribute("message", message);
+		forward(req, resp, "/WEB-INF/views/member/signup.jsp");
 	}
 	
-	private void pwdForm(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+	private void changePwdForm(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		forward(req, resp, "/WEB-INF/views/member/changePwd.jsp");
 	}
 
-	private void pwdSubmit(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+	private void changePwdSubmit(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		MemberDAO dao = new MemberDAO();
+		HttpSession session = req.getSession();
+		String result;
+		
+		try {
+			MemberDTO dto = new MemberDTO();
+			Sessioninfo info = (Sessioninfo)session.getAttribute("member");
+			
+			dto.setId(info.getId());
+			
+			if(dao.updateMemberPwd(dto, req.getParameter("newPwd"), req.getParameter("currentPwd")) == 0) {
+				result = "현재 비밀번호를 확인해주세요.";
+				req.setAttribute("result", result);
+				forward(req, resp, "/WEB-INF/views/member/changePwd.jsp");
+				return;
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		logout(req, resp);
 	}
 
 	private void updateSubmit(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

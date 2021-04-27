@@ -73,12 +73,13 @@ public class MemberDAO {
 		try {
 			conn.setAutoCommit(false);
 			
-			sql = "INSERT INTO member(id, pwd, type, member_name, registered, changed, resigned) VALUES (?, ?, ?, ?, SYSDATE, SYSDATE, '')";
+			sql = "INSERT INTO member(id, pwd, type, member_name, registered, changed, resigned, member_picture_filename) VALUES (?, ?, ?, ?, SYSDATE, SYSDATE, '', ?)";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, dto.getId());
 			pstmt.setString(2, dto.getPwd());
 			pstmt.setString(3, dto.getType());
 			pstmt.setString(4, dto.getMember_name());
+			pstmt.setString(5, dto.getMember_picture_filename());
 
 			result = pstmt.executeUpdate();
 			conn.commit();
@@ -103,12 +104,12 @@ public class MemberDAO {
 	}
 	
 	/**
-	 * member 테이블에 정보 수정 (update문)
+	 * 비밀번호 변경 (update문)
 	 * @param dto
 	 * @return int
 	 * @throws SQLException
 	 */
-	public int updateMember(MemberDTO dto) throws SQLException {
+	public int updateMemberPwd(MemberDTO dto, String newPwd, String oldPwd) throws SQLException {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String sql;
@@ -116,10 +117,11 @@ public class MemberDAO {
 		try {
 			conn.setAutoCommit(false);
 			
-			sql = "UPDATE member SET pwd=? WHERE id=?";
+			sql = "UPDATE member SET pwd=? WHERE id=? AND pwd=?";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, dto.getPwd());
+			pstmt.setString(1, newPwd);
 			pstmt.setString(2, dto.getId());
+			pstmt.setString(3, oldPwd);
 			
 			result = pstmt.executeUpdate();
 			conn.commit();
