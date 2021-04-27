@@ -20,15 +20,15 @@
 <body>
     <header class="header-blue" style="height: 81px;padding: 0px;">
         <nav class="navbar navbar-dark navbar-expand-md navigation-clean-search">
-            <div class="container-fluid"><a class="navbar-brand" href="#">KOD;NG</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="container-fluid"><a class="navbar-brand" href="${pageContext.request.contextPath}/main.do">KOD;NG</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navcol-1">
                     <ul class="navbar-nav">
                         <li class="nav-item"><a class="nav-link" href="#">교육소개</a></li>
                         <li class="nav-item"><a class="nav-link" href="#">교육일정</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">수강신청</a></li>
+                        <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/lectureList/lectureList.do">수강신청</a></li>
                         <li class="nav-item"><a class="nav-link" href="#">커뮤니티</a></li>
                         <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" aria-expanded="false" data-toggle="dropdown" href="#">마이페이지&nbsp;</a>
-                            <div class="dropdown-menu"><a class="dropdown-item" href="#">내 정보 관리</a><a class="dropdown-item" href="#">내 강의실</a><a class="dropdown-item" href="#">게시물 관리</a></div>
+                           <c:if test="${not empty sessionScope.member}"><a class="dropdown-item" href="${pageContext.request.contextPath}/member/changePwd.do">내 정보 관리</a></c:if><a class="dropdown-item" href="${pageContext.request.contextPath}/regist_lecture/regist_lecturelist.do">내 강의실</a><a class="dropdown-item" href="#">게시물 관리</a></div>
                         </li>
                     </ul>
                     <form class="form-inline mr-auto" target="_self">
@@ -36,7 +36,7 @@
                     </form>
                     <c:choose>
                     	<c:when test="${empty sessionScope.member}">
-                    		  <span class="navbar-text"><a class="login" href="${pageContext.request.contextPath}/member/login.do">로그인</a></span><a class="btn btn-light action-button" role="button" href="#">회원가입</a>
+                    		  <span class="navbar-text"><a class="login" href="${pageContext.request.contextPath}/member/login.do">로그인</a></span><a class="btn btn-light action-button" role="button" href="${pageContext.request.contextPath}/member/member.do">회원가입</a>
                     	</c:when>
                     	<c:otherwise>
                     		 <span class="navbar-text"> ${sessionScope.member.member_name} </span> &nbsp;
