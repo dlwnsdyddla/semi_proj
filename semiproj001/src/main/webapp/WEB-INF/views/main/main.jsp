@@ -18,7 +18,7 @@
         <div class="container hero">
             <div class="row">
                 <div class="col-12 col-lg-6 col-xl-5 offset-xl-1">
-                    <h1>코딩, 기초부터 차근차근 </h1>
+                    <h1>코딩, 기초부터 차근차근</h1>
                     <p>핵심 위주로 배워,<br>단기간에 결과물을 만드세요.<br>나만의 웹서비스/업무 자동화 부터<br>커리어 전환까지.&nbsp;</p><button class="btn btn-light btn-lg action-button" type="button">커리큘럼 보러가기</button>
                 </div>
                 <div class="col-md-5 col-lg-5 offset-lg-1 offset-xl-0 d-none d-lg-block phone-holder"><img src="temp/assets/img/1024px-PyCharm_Logo.svg_.png" style="margin: -209px;transform: translate(-61px) scale(0.53);padding: 0px;">
