@@ -3,6 +3,7 @@ package com.lectureList;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -289,6 +290,38 @@ public class LectureListDAO {
 		
 		
 		return dto; 
+	}
+	
+	public int registerLecture(String[] opened_codes, String student_id) throws SQLException {
+		int result = 0;
+		try {
+			conn.setAutoCommit(false);
+		} catch (Exception e) {
+		}
+		
+		for(String s: opened_codes) {
+			String sql = "insert into lecture_register values(?, ?, sysdate)";
+		
+			try(PreparedStatement pstmt = conn.prepareStatement(sql)) {
+				pstmt.setString(1, s);
+				pstmt.setString(2, student_id);
+				if(pstmt.executeUpdate()!=1) {
+					throw new Exception();	
+				}
+				result++;
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		try {
+			conn.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			conn.rollback();
+			return 0;	
+		}
+		
+		return result;
 	}
 	
 	

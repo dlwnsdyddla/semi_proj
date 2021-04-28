@@ -42,6 +42,8 @@ public class LectureListServlet extends HttpServlet {
 			list(req, resp);
 		} else if (uri.indexOf("lectureDetailed.do")!=-1) {
 			lecture_detailed(req, resp);
+		} else if (uri.indexOf("register.do")!=-1) {
+			lecture_register(req, resp);
 		}
 	}
 	
@@ -165,11 +167,21 @@ public class LectureListServlet extends HttpServlet {
 		
 	}
 	
-	protected void lecture_student(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		LectureListDAO dao = new LectureListDAO();
-		LectureListDTO dto = new LectureListDTO();
-		
-		
+	protected void lecture_register(HttpServletRequest req, HttpServletResponse resp) {
+		String[] opened_codes = req.getParameterValues("opened_code");
+		String student_id = req.getParameter("student_id");
+		int result = 0;
+		try {
+			LectureListDAO dao = new LectureListDAO();
+			result = dao.registerLecture(opened_codes, student_id);
+			if(result == 0) {
+				req.setAttribute("error", "insert 과정 중 오류 발생");
+			}
+			String cp = req.getContextPath();
+			resp.sendRedirect(cp+"/lectureList/lectureList.do");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 	}
 

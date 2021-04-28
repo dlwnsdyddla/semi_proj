@@ -19,14 +19,14 @@
 	function lecture_ok() {
 		var f = document.lectureForm;
 		
-		if(f.nums == undefined) {
+		if(f.opened_code == undefined) {
 			return;
 		}
 		
 		var cnt=0;
-		if(f.nums.length!=undefined) {
-			for(var i=0; i<f.nums.length; i++) {
-				if(f.nums[i].checked) cnt++;
+		if(f.opened_code.length!=undefined) {
+			for(var i=0; i<f.opened_code.length; i++) {
+				if(f.opened_code[i].checked) cnt++;
 			}
 		} else {
 			if(f.nums.checked) cnt++;
@@ -38,11 +38,10 @@
 		}
 		
 		if(confirm("선택한 강의를 수강신청하시겠습니까 ?")) {
-			f.action = "lectureSelect.jsp";
+			f.action = "${pageContext.request.contextPath}/lectureList/register.do";
 			f.submit();
+			
 		}
-		
-		f.submit();
 	}
 	
 	
@@ -57,7 +56,7 @@
 	<input class="form-control-plaintext" type="text" value="강의 목록"
 		style="padding: 13px 0px; padding-left: 21px; font-size: 21px; font-family: 'Source Sans Pro', sans-serif; font-weight: 500; font-style: normal;">
 		
-	<form name="lectureForm" action="">	
+	<form name="lectureForm">	
 	<div class="list-group">
 		<c:forEach var="dto" items="${list}">
 		<div class="list-group-item list-group-item-action flex-column align-items-start">
@@ -65,7 +64,11 @@
 					<h5 class="mb-1">강의명: ${dto.lecture_name}</h5>
 					<small>신청현황 : ${dto.curnum}/${dto.maxnum}</small>
 				</div>
-				<input class="float-right" type="checkbox" name="opened_code" value="${dto.opened_code}">
+				<c:choose>
+				<c:when test="${sessionScope.member.type == 's'}">
+					<input class="float-right" type="checkbox" name="opened_code" value="${dto.opened_code}">
+				</c:when>
+				</c:choose>
 				<p class="mb-1">강사명: ${dto.teacher_name} </p>
 				<p class="mb-1" style="font-size: 15px;">강의기간: ${dto.start_date} ~ ${dto.end_date}</p>
 				<small class="text-muted">${dto.lecture_subname}</small>
@@ -75,6 +78,7 @@
 				</div>
 			</c:forEach>
 	</div>
+	<input type="hidden" name="student_id" value="${sessionScope.member.id}">
 	</form>
 	
 	<div class="paging" style="padding: 15px;">
@@ -106,7 +110,11 @@
 			</form>
 		</td>	
 	<td align="right" width="100">
+	<c:choose>
+	<c:when test="${sessionScope.member.type == 's'}">
 		<button class="btn" type="button" style="background: #07689f; color: white" onclick="lecture_ok();">수강신청</button>
+	</c:when>
+	</c:choose>
 	</td>
 	</tr>
 </table>
