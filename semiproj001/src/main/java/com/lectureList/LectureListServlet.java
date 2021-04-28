@@ -164,5 +164,13 @@ public class LectureListServlet extends HttpServlet {
 		}
 		
 	}
+	
+	protected void lecture_student(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		LectureListDAO dao = new LectureListDAO();
+		LectureListDTO dto = new LectureListDTO();
+		
+		
+		
+	}
 
 }

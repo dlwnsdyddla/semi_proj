@@ -29,10 +29,10 @@
                     <div class="text" style="font-family: 'Source Sans Pro', sans-serif;">
                     	<hr>
                         <p>강의기간: ${dto.start_date} ~ ${dto.end_date} </p>
-                        <p>강의상세: ${dto.lecture_subname} </p>
+                        <p>${dto.lecture_subname} </p>
                         <p>신청현황 : ${dto.curnum}/${dto.maxnum} </p>
                         <hr>
-                        <p>강의소개: </p>
+                        <p>강의소개: ${dto.lecture_detail}</p>
                         
                    <div style="text-align: right">
                    		<button type="button" class="btn" style="border: 1px solid gray" onclick="javascript:location.href='${pageContext.request.contextPath}/lectureList/lectureList.do?${query}';">리스트</button>

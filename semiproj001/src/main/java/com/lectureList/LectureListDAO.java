@@ -244,12 +244,13 @@ public class LectureListDAO {
 		String sql;
 		
 		try {
-			sql = "SELECT opened_code, lecture_code, lecture_name, "
+			sql = "SELECT opened_code, lecture_name, "
 					+ " lecture_subname, teacher_name, "
-					+ " TO_CHAR(start_date,'YYYY-MM-DD') start_date, "
+					+ " TO_CHAR(start_date,'YYYY-MM-DD') start_date,  "
 					+ " TO_CHAR(end_date, 'YYYY-MM-DD') end_date, "
-					+ " curnum, maxnum, approved "
-					+ " FROM lecture_list WHERE opened_code = ? ";
+					+ " curnum, maxnum, lecture_detail "
+					+ " FROM lecture_detailed "
+					+ " WHERE opened_code = ? ";
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, opened_code);
 			
@@ -257,7 +258,6 @@ public class LectureListDAO {
 			if(rs.next()) {
 				dto= new LectureListDTO();
 				dto.setOpened_code(rs.getString("opened_code"));
-				dto.setLecture_code(rs.getString("lecture_code"));
 				dto.setLecture_name(rs.getString("lecture_name"));
 				dto.setLecture_subname(rs.getString("lecture_subname"));
 				dto.setTeacher_name(rs.getString("teacher_name"));
@@ -265,7 +265,7 @@ public class LectureListDAO {
 				dto.setEnd_date(rs.getString("end_date"));
 				dto.setCurnum(rs.getInt("curnum"));
 				dto.setMaxnum(rs.getInt("maxnum"));
-				dto.setApproved(rs.getString("approved"));
+				dto.setLecture_detail(rs.getString("lecture_detail"));
 			}
 			
 		} catch (Exception e) {

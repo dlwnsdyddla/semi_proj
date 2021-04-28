@@ -12,9 +12,39 @@
 <jsp:include page="/WEB-INF/views/layout/staticHeader.jsp" />
 <script type="text/javascript">
 	function searchList() {
-		var f = documenet.searchForm;
-		f.submit;
+		var f = document.searchForm;
+		f.submit();
 	}
+	
+	function lecture_ok() {
+		var f = document.lectureForm;
+		
+		if(f.nums == undefined) {
+			return;
+		}
+		
+		var cnt=0;
+		if(f.nums.length!=undefined) {
+			for(var i=0; i<f.nums.length; i++) {
+				if(f.nums[i].checked) cnt++;
+			}
+		} else {
+			if(f.nums.checked) cnt++;
+		}
+		
+		if(cnt<1) {
+			alert("수강신청할 강의를 선택하세요");
+			return;
+		}
+		
+		if(confirm("선택한 강의를 수강신청하시겠습니까 ?")) {
+			f.action = "lectureSelect.jsp";
+			f.submit();
+		}
+		
+		f.submit();
+	}
+	
 	
 </script>
 
@@ -26,27 +56,26 @@
 
 	<input class="form-control-plaintext" type="text" value="강의 목록"
 		style="padding: 13px 0px; padding-left: 21px; font-size: 21px; font-family: 'Source Sans Pro', sans-serif; font-weight: 500; font-style: normal;">
+		
+	<form name="lectureForm" action="">	
 	<div class="list-group">
 		<c:forEach var="dto" items="${list}">
-		<a
-			class="list-group-item list-group-item-action flex-column align-items-start"
-			href="${articleUrl}&opened_code=${dto.opened_code}"> 
+		<div class="list-group-item list-group-item-action flex-column align-items-start">
 				<div class="d-flex w-100 justify-content-between">
 					<h5 class="mb-1">강의명: ${dto.lecture_name}</h5>
 					<small>신청현황 : ${dto.curnum}/${dto.maxnum}</small>
 				</div>
-				<input class="float-right" type="checkbox">
+				<input class="float-right" type="checkbox" name="opened_code" value="${dto.opened_code}">
 				<p class="mb-1">강사명: ${dto.teacher_name} </p>
 				<p class="mb-1" style="font-size: 15px;">강의기간: ${dto.start_date} ~ ${dto.end_date}</p>
-				<small class="text-muted">강의상세: ${dto.lecture_subname}</small>
+				<small class="text-muted">${dto.lecture_subname}</small>
 				
 				<button class="btn btn-primary float-right" type="button" style="background: #1F90A3; border-color: #1F90A3" onclick="javascript:location.href='${articleUrl}&opened_code=${dto.opened_code}'">자세히</button> 
 				
-				</a>
+				</div>
 			</c:forEach>
-		
-
 	</div>
+	</form>
 	
 	<div class="paging" style="padding: 15px;">
 	<table style="width: 100%; margin: 0px auto; border-spacing: 0px;">
@@ -77,7 +106,7 @@
 			</form>
 		</td>	
 	<td align="right" width="100">
-		<button class="btn" type="button" style="background: #07689f; color: white">수강신청</button>
+		<button class="btn" type="button" style="background: #07689f; color: white" onclick="lecture_ok();">수강신청</button>
 	</td>
 	</tr>
 </table>
