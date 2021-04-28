@@ -1,6 +1,7 @@
 package com.lectureList;
 
 public class LectureListDTO {
+	private int listNum;
 	private String opened_code;
 	private String lecture_code;
 	private String lecture_name;
@@ -16,6 +17,12 @@ public class LectureListDTO {
 	private String approved;
 	private String lecture_detail;
 	
+	public int getListNum() {
+		return listNum;
+	}
+	public void setListNum(int listNum) {
+		this.listNum = listNum;
+	}
 	public String getOpened_code() {
 		return opened_code;
 	}

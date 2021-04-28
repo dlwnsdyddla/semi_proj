@@ -22,13 +22,17 @@
             <div class="row">
                 <div class="col-lg-10 col-xl-8 offset-lg-1 offset-xl-2">
                     <div class="intro">
-                        <h1 class="text-center" style="font-family: 'Source Sans Pro', sans-serif;">&nbsp;강의명: ${dto.lecture_name}</h1>
-                        <p class="text-center"><span class="by" style="font-family: 'Source Sans Pro', sans-serif;">by</span> <a href="#" style="font-family: 'Source Sans Pro', sans-serif;">강사명: ${dto.teacher_name}</a><span class="date" style="font-family: 'Source Sans Pro', sans-serif;">2021년 4월 23일 금요일</span></p>
+                        <h1 class="text-center" style="font-family: 'Source Sans Pro', sans-serif;">&nbsp;${dto.lecture_name}</h1>
+                        <p class="text-center"><span style="font-family: 'Source Sans Pro', sans-serif;">${dto.opened_code}</span></p>
+                        <p class="text-center"><span class="by" style="font-family: 'Source Sans Pro', sans-serif;">by</span> <span style="font-family: 'Source Sans Pro', sans-serif;">강사명: ${dto.teacher_name}</span><span class="date" style="font-family: 'Source Sans Pro', sans-serif;">2021년 4월 30일 금요일</span></p>
                     </div>
                     <div class="text" style="font-family: 'Source Sans Pro', sans-serif;">
-                    	
+                    	<hr>
                         <p>강의기간: ${dto.start_date} ~ ${dto.end_date} </p>
                         <p>강의상세: ${dto.lecture_subname} </p>
+                        <p>신청현황 : ${dto.curnum}/${dto.maxnum} </p>
+                        <hr>
+                        <p>강의소개: </p>
                         
                    <div style="text-align: right">
                    		<button type="button" class="btn" style="border: 1px solid gray" onclick="javascript:location.href='${pageContext.request.contextPath}/lectureList/lectureList.do?${query}';">리스트</button>

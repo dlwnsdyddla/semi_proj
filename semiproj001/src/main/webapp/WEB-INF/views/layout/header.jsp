@@ -25,7 +25,7 @@
 		<nav
 			class="navbar navbar-dark navbar-expand-md navigation-clean-search">
 			<div class="container-fluid">
-				<a class="navbar-brand" href="#">KOD;NG</a>
+				<a class="navbar-brand" href="${pageContext.request.contextPath}/main.do">KOD;NG</a>
 				<button data-toggle="collapse" class="navbar-toggler"
 					data-target="#navcol-1">
 					<span class="sr-only">Toggle navigation</span><span

@@ -237,19 +237,21 @@ public class LectureListDAO {
 		return list;
 	}
 	
-	public LectureListDTO readLecutreList(String code) {
+	public LectureListDTO readLecutreList(String opened_code) {
 		LectureListDTO dto =null;
 		PreparedStatement pstmt= null;
 		ResultSet rs = null;
 		String sql;
 		
 		try {
-			sql = "SELECT opened_code, lecture_code, lecture_name, lecture_subname, "
-					+ " teacher_name, start_date, end_date, "
+			sql = "SELECT opened_code, lecture_code, lecture_name, "
+					+ " lecture_subname, teacher_name, "
+					+ " TO_CHAR(start_date,'YYYY-MM-DD') start_date, "
+					+ " TO_CHAR(end_date, 'YYYY-MM-DD') end_date, "
 					+ " curnum, maxnum, approved "
 					+ " FROM lecture_list WHERE opened_code = ? ";
 			pstmt=conn.prepareStatement(sql);
-			pstmt.setString(1, code);
+			pstmt.setString(1, opened_code);
 			
 			rs=pstmt.executeQuery();
 			if(rs.next()) {

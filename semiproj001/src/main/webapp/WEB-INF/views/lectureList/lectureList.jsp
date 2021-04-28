@@ -15,6 +15,7 @@
 		var f = documenet.searchForm;
 		f.submit;
 	}
+	
 </script>
 
 </head>
@@ -26,9 +27,10 @@
 	<input class="form-control-plaintext" type="text" value="강의 목록"
 		style="padding: 13px 0px; padding-left: 21px; font-size: 21px; font-family: 'Source Sans Pro', sans-serif; font-weight: 500; font-style: normal;">
 	<div class="list-group">
+		<c:forEach var="dto" items="${list}">
 		<a
 			class="list-group-item list-group-item-action flex-column align-items-start"
-			href="#"> <c:forEach var="dto" items="${list}">
+			href="${articleUrl}&opened_code=${dto.opened_code}"> 
 				<div class="d-flex w-100 justify-content-between">
 					<h5 class="mb-1">강의명: ${dto.lecture_name}</h5>
 					<small>신청현황 : ${dto.curnum}/${dto.maxnum}</small>
@@ -37,12 +39,12 @@
 				<p class="mb-1">강사명: ${dto.teacher_name} </p>
 				<p class="mb-1" style="font-size: 15px;">강의기간: ${dto.start_date} ~ ${dto.end_date}</p>
 				<small class="text-muted">강의상세: ${dto.lecture_subname}</small>
-				<button class="btn btn-primary float-right" type="button" style="background: #1F90A3; border-color: #1F90A3" onclick="javascript:location.href='${pageContext.request.contextPath}/lectureList/lectureDetailed.do';">자세히</button> 
-			
-				<hr>
+				
+				<button class="btn btn-primary float-right" type="button" style="background: #1F90A3; border-color: #1F90A3" onclick="javascript:location.href='${articleUrl}&opened_code=${dto.opened_code}'">자세히</button> 
+				
+				</a>
 			</c:forEach>
-
-		</a>
+		
 
 	</div>
 	

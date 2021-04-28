@@ -91,10 +91,10 @@ public class LectureListServlet extends HttpServlet {
 			list=dao.listLecture(offset, rows, condition, keyword);
 		}
 		
-		int curnum, n=0;
+		int listnum, n=0;
 		for(LectureListDTO dto: list) {
-			curnum = dataCount - (offset+n);
-			dto.setCurnum(curnum);
+			listnum = dataCount - (offset+n);
+			dto.setListNum(listnum);
 			n++;
 		}
 		
@@ -102,11 +102,11 @@ public class LectureListServlet extends HttpServlet {
 		if(keyword.length()!=0) {
 			query="condition="+condition+"&keyword="+URLEncoder.encode(keyword, "utf-8");
 		}
-		String listUrl = cp +"lectureList/lectureList.do";
-		String articleUrl = cp+"lectureList/lectureDetailed.do?page="+current_page;
+		String listUrl = cp +"/lectureList/lectureList.do";
+		String articleUrl = cp+"/lectureList/lectureDetailed.do?page="+current_page;
 		if(query.length()!=0) {
 			listUrl+="?"+query;
-			articleUrl+="&"+articleUrl;
+			articleUrl+="&"+query;
 		}
 		String paging = util.paging(current_page, total_page, listUrl);
 		
@@ -130,7 +130,7 @@ public class LectureListServlet extends HttpServlet {
 		String query= "page="+page;
 		
 		try {
-			String code= req.getParameter("opened_code");
+			String opened_code= req.getParameter("opened_code");
 			
 			String condition = req.getParameter("condition");
 			String keyword = req.getParameter("keyword");
@@ -145,12 +145,12 @@ public class LectureListServlet extends HttpServlet {
 				query+="&condition="+condition+"&keyword="+URLEncoder.encode(keyword, "utf-8");
 			}
 			
-			LectureListDTO dto = dao.readLecutreList(code);
+			LectureListDTO dto = dao.readLecutreList(opened_code);
 			if(dto==null) {
 				resp.sendRedirect(cp+"/lectureList/lecturelist.do?"+query);
 				return;
 			}
-			dto.setLecture_detail(dto.getLecture_detail().replace("\n", "<br>"));
+			//dto.setLecture_detail(dto.getLecture_detail().replace("\n", "<br>"));
 			
 			req.setAttribute("dto", dto);
 			req.setAttribute("page", page);
