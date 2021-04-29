@@ -11,13 +11,49 @@ public class Regist_LectureDTO {
 	private String student_id;
 	private String registered_date;
 	private String teacher_name;
+	private String teacher_id;
 	private String start_date;
 	private String end_date;
 	private int curnum;
 	private int maxnum;
 	private String approved;
+	private String approved_date;
+	private String lecture_detail;
+	private String start_time;
+	private String end_time;
 	
 	
+	
+	public String getStart_time() {
+		return start_time;
+	}
+	public void setStart_time(String start_time) {
+		this.start_time = start_time;
+	}
+	public String getEnd_time() {
+		return end_time;
+	}
+	public void setEnd_time(String end_time) {
+		this.end_time = end_time;
+	}
+	public String getLecture_detail() {
+		return lecture_detail;
+	}
+	public void setLecture_detail(String lecture_detail) {
+		this.lecture_detail = lecture_detail;
+	}
+	public String getTeacher_id() {
+		return teacher_id;
+	}
+	public void setTeacher_id(String teacher_id) {
+		this.teacher_id = teacher_id;
+	}
+	public String getApproved_date() {
+		return approved_date;
+	}
+	public void setApproved_date(String approved_date) {
+		this.approved_date = approved_date;
+	}
 	public String getOpened_code() {
 		return opened_code;
 	}

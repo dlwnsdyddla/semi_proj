@@ -19,7 +19,7 @@
 <input class="form-control-plaintext" type="text" value="강의 목록" style="padding: 13px 0px;padding-left: 21px;font-size: 21px;font-family: 'Source Sans Pro', sans-serif;font-weight: 500;font-style: normal;">
     <div class="list-group"><a class="list-group-item list-group-item-action flex-column align-items-start" href="#">
             <div class="d-flex w-100 justify-content-between">
-                <h5 class="mb-1">웹개발 종합반</h5><small>신청현황 : 18/20</small>
+                 <h5 class="mb-1">${lecture_name}</h5><small>신청현황 : ${currnum}/${maxnum}</small>
             </div><input class="float-right" type="checkbox">
             <p class="mb-1">이준용 강사</p>
             <p class="mb-1" style="font-size: 15px;">5월 3일(월) ~ 5월 30일(일)</p><small class="text-muted">코딩 왕초보 탈출!</small>

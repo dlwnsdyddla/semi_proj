@@ -28,7 +28,8 @@
         </div>
 
        </c:forEach>
-      </div><button class="btn btn-primary float-right" type="button" style="margin-right: 23px;margin-top: 17px;margin-bottom: 0px;background: #07689f;">수강신청</button>    
+      </div><button class="btn btn-primary float-right" type="button" style="margin-right: 23px;margin-top: 17px;margin-bottom: 0px;background: #07689f;"onclick="javascript:location.href='${pageContext.request.contextPath}/teacher/created.do';">강의등록하기</button>    
+      <button class="btn btn-primary float-right" type="button" style="margin-right: 23px;margin-top: 17px;margin-bottom: 0px;background: #07689f;"onclick="javascript:location.href='${pageContext.request.contextPath}/teacher/update.do---------------------------';">강의수정하기</button>    
 
 	
 		 

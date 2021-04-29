@@ -53,6 +53,9 @@ public class Regist_LectureServlet extends HttpServlet{
 			lecturelist(req, resp);
 		}else if(uri.indexOf("regist_teacher_lecturelist.do")!=-1) {
 			teacher_lecturelist(req,resp);
+			
+		} else if(uri.indexOf("regist_admin_lecturelist.do")!=-1) {
+			admin_lecturelist(req,resp);
 		} 
 	}	
 		
@@ -100,6 +103,7 @@ public class Regist_LectureServlet extends HttpServlet{
 		
 		//list.jsp에 넘겨줄 데이터
 		req.setAttribute("list", list);
+		
 		req.setAttribute("paging", paging);
 		req.setAttribute("page", current_page);
 		req.setAttribute("dataCount", dataCount);
@@ -108,17 +112,99 @@ public class Regist_LectureServlet extends HttpServlet{
 		//req.setAttribute("condition", condition);
 		//req.setAttribute("keyword", keyword);		
 		
-		
-
-		
 		forward(req, resp, "/WEB-INF/views/regist_lecture/list.jsp");
 		
 		
 	}		
-		
-	protected void teacher_lecturelist(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {		
-		
 	
+	//선생강의리스트
+	protected void teacher_lecturelist(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {		
+		String cp= req.getContextPath();
+		
+		Regist_LectureDAO dao = new Regist_LectureDAO();
+		MyUtil util = new MyUtil();
+		
+		HttpSession session = req.getSession();
+		Sessioninfo info = (Sessioninfo)session.getAttribute("member"); 
+		String id = info.getId();
+		
+		String page = req.getParameter("page");
+		int current_page = 1;
+		if(page !=null) {
+			current_page = Integer.parseInt(req.getParameter(page));
+		}		
+
+		//전체 데이터 개수
+		int dataCount =dao.dataCount();
+		//전체 페이지 수
+		int rows=6;
+		int total_page=util.pageCount(rows, dataCount);
+		if(current_page >total_page) {
+			current_page=total_page;
+		}
+		
+		int offset = (current_page -1) *rows;
+		if(offset <0) offset =0; //ex ) 건너뛰기 10개씩
+		List<Regist_LectureDTO> list =dao.teacher_lecturelist(offset, rows, id);
+		String listUrl=cp+"/regist_lecture/teacherlist.do";
+		
+		
+		String paging = util.paging(current_page, total_page, listUrl);
+		
+		//list.jsp에 넘겨줄 데이터
+		req.setAttribute("list", list);
+		
+		req.setAttribute("paging", paging);
+		req.setAttribute("page", current_page);
+		req.setAttribute("dataCount", dataCount);
+		req.setAttribute("total_page", total_page);		
+		
+		forward(req, resp, "/WEB-INF/views/regist_lecture/teacherlist.jsp");
+	}
+	
+	//관리자 강의리스트
+	protected void admin_lecturelist(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {		
+		String cp= req.getContextPath();
+		
+		Regist_LectureDAO dao = new Regist_LectureDAO();
+		MyUtil util = new MyUtil();
+		
+		HttpSession session = req.getSession();
+		Sessioninfo info = (Sessioninfo)session.getAttribute("member"); 
+		String id = info.getId();
+		
+		String page = req.getParameter("page");
+		int current_page = 1;
+		if(page !=null) {
+			current_page = Integer.parseInt(req.getParameter(page));
+		}		
+
+		//전체 데이터 개수
+		int dataCount =dao.dataCount();
+		//전체 페이지 수
+		int rows=6;
+		int total_page=util.pageCount(rows, dataCount);
+		if(current_page >total_page) {
+			current_page=total_page;
+		}
+		
+		int offset = (current_page -1) *rows;
+		if(offset <0) offset =0; //ex ) 건너뛰기 10개씩
+		List<Regist_LectureDTO> list =dao.adminLecturelist(offset, rows, id);
+		String listUrl=cp+"/regist_lecture/admin_lecturelist.do";
+		
+		
+		String paging = util.paging(current_page, total_page, listUrl);
+		
+		//list.jsp에 넘겨줄 데이터
+		req.setAttribute("list", list);
+		
+		req.setAttribute("paging", paging);
+		req.setAttribute("page", current_page);
+		req.setAttribute("dataCount", dataCount);
+		req.setAttribute("total_page", total_page);		
+		
+		forward(req, resp, "/WEB-INF/views/regist_lecture/admin_lecturelist.jsp");
 	}	
 		
 }

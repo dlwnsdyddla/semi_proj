@@ -47,8 +47,23 @@
 										href="${pageContext.request.contextPath}/member/changePwd.do">내
 										정보 관리</a>
 								</c:if>
-								<a class="dropdown-item" href="${pageContext.request.contextPath}/regist_lecture/regist_lecturelist.do">내 강의실</a><a
-									class="dropdown-item" href="#">게시물 관리</a>
+								<c:choose>
+								
+									<c:when test="${sessionScope.member.type=='s'}">
+										<a class="dropdown-item" href="${pageContext.request.contextPath}/regist_lecture/regist_lecturelist.do">내 강의실</a>
+									</c:when>
+									<c:when test="${sessionScope.member.type=='t'}">
+										<a class="dropdown-item" href="${pageContext.request.contextPath}/regist_lecture/regist_teacher_lecturelist.do">강의리스트조회</a>	
+									</c:when>
+									<c:when test="${sessionScope.member.type=='a'}">
+										<a class="dropdown-item" href="${pageContext.request.contextPath}/regist_lecture/regist_admin_lecturelist.do">전체 강의리스트조회</a>	
+									</c:when>
+								</c:choose>
+								
+								
+								<a class="dropdown-item" href="#">게시물 관리</a>
+									
+								
 							</div></li>
 					</ul>
 					<form class="form-inline mr-auto" target="_self">

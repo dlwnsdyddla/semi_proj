@@ -15,7 +15,8 @@ public class LectureListDTO {
 	private int maxnum;
 	private String approved;
 	private String lecture_detail;
-	
+
+
 	public String getOpened_code() {
 		return opened_code;
 	}
