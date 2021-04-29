@@ -25,7 +25,7 @@
 		<nav
 			class="navbar navbar-dark navbar-expand-md navigation-clean-search">
 			<div class="container-fluid">
-				<a class="navbar-brand" href="#">KOD;NG</a>
+				<a class="navbar-brand" href="${pageContext.request.contextPath}/main.do">KOD;NG</a>
 				<button data-toggle="collapse" class="navbar-toggler"
 					data-target="#navcol-1">
 					<span class="sr-only">Toggle navigation</span><span
@@ -43,6 +43,7 @@
 						<li class="nav-item dropdown"><a
 							class="dropdown-toggle nav-link" aria-expanded="false"
 							data-toggle="dropdown" href="#">마이페이지&nbsp;</a>
+							<c:if test="${not empty sessionScope.member}">
 							<div class="dropdown-menu">
 								<c:choose>
 									<c:when test="${sessionScope.member.type=='s'}">
@@ -57,12 +58,12 @@
 										<a class="dropdown-item" href="${pageContext.request.contextPath}/approved/list.do">강의 개설 관리</a>
 									</c:when>
 								</c:choose>
-								<c:if test="${not empty sessionScope.member}">
-									<a class="dropdown-item" href="#">게시물 관리</a>
 									<a class="dropdown-item"href="${pageContext.request.contextPath}/member/changePwd.do">패스워드 변경</a>
+								<c:if test="${sessionScope.member.type!='a'}">
 									<a class="dropdown-item"href="${pageContext.request.contextPath}/member/resign.do">회원탈퇴</a>
 								</c:if>
 							</div>
+							</c:if>
 						</li>
 					</ul>
 					<form class="form-inline mr-auto" target="_self">
