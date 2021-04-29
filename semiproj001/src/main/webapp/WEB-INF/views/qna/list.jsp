@@ -39,10 +39,19 @@
 					      <td>${dto.opened_code}</td>
 					      <td>
 					           <a href="${articleUrl}&boardNum=${dto.qna_code}">${dto.question_title}</a>
-					           <c:if test="${dto.qna_code}">└&nbsp;</c:if>${dto.answer_title} | ${dto.answer_id} | ${dto.answer_date}
 					      </td>
-					      <td>${dto.question_id}</td>
+					      <td>${dto.question_name}</td>
 					      <td>${dto.question_date}</td>
+				 	 </tr>
+				 	 
+				 	 <tr align="center" bgcolor="#ffffff" height="35" style="border-bottom: 1px solid #cccccc;"> 
+				 	 	<td>${dto.qna_code}</td>
+					    <td>${dto.opened_code}</td>
+				 	 	<td>
+				 	 		<c:if test="${dto.qna_code}">└&nbsp;</c:if><a href="${articleUrl}&boardNum=${dto.qna_code}">${dto.answer_title}</a>
+				 	 	</td>
+				 	 	<td>${dto.answer_name}</td>
+					    <td>${dto.answer_date}</td>
 				 	 </tr>
 				</c:forEach>
 				
@@ -57,6 +66,11 @@
 				<td align="center">${dataCount==0?"등록된 게시물이 없습니다.":paging}</td>
 			</tr>
 		</table>
+	</div>
+	
+	<div>
+		
+	
 	</div>
 
 
