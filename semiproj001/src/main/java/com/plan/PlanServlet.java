@@ -1,6 +1,7 @@
 package com.plan;
 
 import java.io.IOException;
+import java.util.Calendar;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -38,7 +39,41 @@ public class PlanServlet extends HttpServlet{
 	}
 
 	private void planForm(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		Calendar cal = Calendar.getInstance();
+		int year = cal.get(Calendar.YEAR);
+		int month = cal.get(Calendar.MONTH)+1;
+
+		String sy = req.getParameter("year");
+		String sm = req.getParameter("month");
+		
+		if(sy!=null) {
+			year = Integer.parseInt(sy);
+		}
+		if(sm!=null) {
+			month = Integer.parseInt(sm);
+		}
+		
+		cal.set(year, month-1, 1);
+		year = cal.get(Calendar.YEAR);
+		month = cal.get(Calendar.MONTH)+1;
+		
+		int lastDate=cal.getActualMaximum(Calendar.DATE);
+		int week=cal.get(Calendar.DAY_OF_WEEK);
+		
+		Calendar preCal = (Calendar)cal.clone();
+		preCal.add(Calendar.DATE, -(week-1));
+		
+		int preDate = preCal.get(Calendar.DATE);
+		
+		req.setAttribute("year", year);
+		req.setAttribute("month", month);
+		req.setAttribute("lastDate", lastDate);
+		req.setAttribute("preDate", preDate);
+		req.setAttribute("week", week);
+		
 		forward(req, resp, "/WEB-INF/views/plan/plan.jsp");
+		
 	}
 
 }
