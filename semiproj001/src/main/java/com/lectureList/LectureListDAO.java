@@ -311,14 +311,13 @@ public class LectureListDAO {
 				result++;
 			} catch (Exception e) {
 				e.printStackTrace();
+				conn.rollback();
+				return 0;
 			}
 		}
 		try {
 			conn.commit();
 		} catch (Exception e) {
-			e.printStackTrace();
-			conn.rollback();
-			return 0;	
 		}
 		
 		return result;

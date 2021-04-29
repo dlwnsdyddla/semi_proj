@@ -62,19 +62,17 @@
 		<div class="list-group-item list-group-item-action flex-column align-items-start">
 				<div class="d-flex w-100 justify-content-between">
 					<h5 class="mb-1">강의명: ${dto.lecture_name}</h5>
+					<c:if test="${mode == 'update' }">
 					<small>신청현황 : ${dto.curnum}/${dto.maxnum}</small>
+					</c:if>
 				</div>
-				<c:choose>
-				<c:when test="${sessionScope.member.type == 's'}">
+				<c:if test="${sessionScope.member.type == 's'}">
 					<input class="float-right" type="checkbox" name="opened_code" value="${dto.opened_code}">
-				</c:when>
-				</c:choose>
+				</c:if>
 				<p class="mb-1">강사명: ${dto.teacher_name} </p>
 				<p class="mb-1" style="font-size: 15px;">강의기간: ${dto.start_date} ~ ${dto.end_date}</p>
 				<small class="text-muted">${dto.lecture_subname}</small>
-				
 				<button class="btn btn-primary float-right" type="button" style="background: #1F90A3; border-color: #1F90A3" onclick="javascript:location.href='${articleUrl}&opened_code=${dto.opened_code}'">자세히</button> 
-				
 				</div>
 			</c:forEach>
 	</div>
@@ -95,10 +93,16 @@
 	<table style="width: 100%; margin: 0px auto; border-spacing: 0px;">
 	 <tr height="40">
 		<td align="left" width="100">
+			<c:if test="${mode == 'register' }">
 			<button class="btn" type="button" onclick="javascript:location.href='${pageContext.request.contextPath}/lectureList/lectureList.do';"
 			style="background: gray; color: white">새로고침</button>
+			</c:if>
+			<c:if test="${mode == 'approve' }">
+			<button class="btn" type="button" onclick="javascript:location.href='${pageContext.request.contextPath}/approved/list.do';"
+			style="background: gray; color: white">새로고침</button>
+			</c:if>
 		</td>
-	
+	<c:if test="${mode == 'register' }">
 		<td align="center">
 			<form name="searchForm" action="${pageContext.request.contextPath}/lectureList/lectureList.do" method="post">
 				<select name="condition" class="selectField">
@@ -108,13 +112,12 @@
 				<input type="text" name="keyword" class="boxTF" style="height: 25px">
 				<button type="button" class="btn" onclick="searchList()" style="border: 1px solid gray; height: 25px; padding: 0px; vertical-align: top;">검색</button>
 			</form>
-		</td>	
+		</td>
+	</c:if>	
 	<td align="right" width="100">
-	<c:choose>
-	<c:when test="${sessionScope.member.type == 's'}">
+	<c:if test="${sessionScope.member.type == 's' && mode == 'register' }">
 		<button class="btn" type="button" style="background: #07689f; color: white" onclick="lecture_ok();">수강신청</button>
-	</c:when>
-	</c:choose>
+	</c:if>
 	</td>
 	</tr>
 </table>

@@ -4,6 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
+
 <html>
 <head>
 <meta charset="UTF-8">
@@ -26,18 +27,31 @@
                         <p class="text-center"><span style="font-family: 'Source Sans Pro', sans-serif;">${dto.opened_code}</span></p>
                         <p class="text-center"><span class="by" style="font-family: 'Source Sans Pro', sans-serif;">by</span> <span style="font-family: 'Source Sans Pro', sans-serif;">강사명: ${dto.teacher_name}</span><span class="date" style="font-family: 'Source Sans Pro', sans-serif;">2021년 4월 30일 금요일</span></p>
                     </div>
+                    
                     <div class="text" style="font-family: 'Source Sans Pro', sans-serif;">
+                    
                     	<hr>
                         <p>강의기간: ${dto.start_date} ~ ${dto.end_date} </p>
                         <p>${dto.lecture_subname} </p>
+                        <c:if test="${mode != 'approve' }">
                         <p>신청현황 : ${dto.curnum}/${dto.maxnum} </p>
+                        </c:if>
                         <hr>
                         <p>강의소개: ${dto.lecture_detail}</p>
-                        
+                      
                    <div style="text-align: right">
-                   		<button type="button" class="btn" style="border: 1px solid gray" onclick="javascript:location.href='${pageContext.request.contextPath}/lectureList/lectureList.do?${query}';">리스트</button>
-                   
+                   		<c:if test="${mode!= 'approve' }">
+                   		<button type="button" class="btn" style="border: 1px solid gray; margin-left: 10px;" onclick="javascript:location.href='${pageContext.request.contextPath}/lectureList/lectureList.do';">리스트</button>
+                   		</c:if>
+                   		<c:if test="${mode == 'approve' }">
+	                   		<button type="button" class="btn" style="border: 1px solid gray; margin-left: 10px;" onclick="javascript:location.href='${pageContext.request.contextPath}/approved/list.do';">리스트</button>
+	                   		<button type="button" class="btn" style="border: 1px solid gray; margin-left: 10px;" onclick="submit()">승인</button>
+	                   		<button type="button" class="btn" style="border: 1px solid gray; margin-left: 10px;" onclick="deny()">거부</button>
+                   		</c:if>
                    </div>     
+                   <form name="sendForm" method="post">
+	               <input type="hidden" name="opened_code" value="${dto.opened_code }">
+	               </form> 
                         <figure class="figure d-block"></figure>
                     </div>
                 </div>
@@ -50,5 +64,19 @@
     <jsp:include page="/WEB-INF/views/layout/footer.jsp"></jsp:include>
 </div>
 <jsp:include page="/WEB-INF/views/layout/staticFooter.jsp"/>
+
+
+<script type="text/javascript">
+	function submit(){
+		var f = document.sendForm;
+		f.action= "${pageContext.request.contextPath}/approved/submit.do";
+		f.submit();
+	}
+	function deny(){
+		var f = document.sendForm;
+		f.action= "${pageContext.request.contextPath}/approved/deny.do";
+		f.submit();
+	}
+</script>
 </body>
 </html>

@@ -52,10 +52,8 @@ public class RegisteredServlet extends HttpServlet {
 		req.setAttribute("lecture", lecture);
 		req.setAttribute("opened_code", opened_code);
 		
-		forward(req, resp, "/WEB-INF/views/layout/registeredList.jsp");
+		forward(req, resp, "/WEB-INF/views/registered/registeredList.jsp");
 	}
-
-
 	
 	
 

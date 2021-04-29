@@ -31,6 +31,7 @@ public class LectureListServlet extends HttpServlet {
 	protected void forward(HttpServletRequest req, HttpServletResponse resp, String path) throws ServletException, IOException {
 		RequestDispatcher rd = req.getRequestDispatcher(path);
 		rd.forward(req, resp);
+		System.out.println("여기까진 와뜸");
 	}
 	
 	protected void process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -120,6 +121,7 @@ public class LectureListServlet extends HttpServlet {
 		req.setAttribute("articleUrl", articleUrl);
 		req.setAttribute("condition", condition);
 		req.setAttribute("keyword", keyword);
+		req.setAttribute("mode", "register");
 		
 		forward(req, resp, "/WEB-INF/views/lectureList/lectureList.jsp");
 		
@@ -174,8 +176,11 @@ public class LectureListServlet extends HttpServlet {
 		try {
 			LectureListDAO dao = new LectureListDAO();
 			result = dao.registerLecture(opened_codes, student_id);
+			System.out.println(result);
 			if(result == 0) {
-				req.setAttribute("error", "insert 과정 중 오류 발생");
+				req.setAttribute("error", "수강 신청 중 오류 발생 - 이미 수강 중인 강의가 존재합니다.");
+				forward(req, resp, "/WEB-INF/views/lectureList/fail.jsp");
+				return;
 			}
 			String cp = req.getContextPath();
 			resp.sendRedirect(cp+"/lectureList/lectureList.do");
