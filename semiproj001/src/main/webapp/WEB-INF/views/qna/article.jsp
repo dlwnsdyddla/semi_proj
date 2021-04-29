@@ -57,16 +57,12 @@
 				<td>${dto.question_title}</td>
 			</tr>
 			<tr height="35" style="border-bottom: 1px solid #cccccc;">
-				<td width="50%" align="left" style="padding-left: 5px;">
-					${dto.qna_code}</td>
-				<td width="50%" align="right" style="padding-right: 5px;">
-					${dto.opened_code}</td>
+				<td style="padding-left: 5px;">
+					${dto.qna_code} | ${dto.opened_code}</td>
 			</tr>
 			<tr height="35" style="border-bottom: 1px solid #cccccc;">
-				<td width="50%" align="left" style="padding-left: 5px;">
-					${dto.question_id}</td>
-				<td width="50%" align="right" style="padding-right: 5px;">
-					${dto.question_date}</td>
+				<td style="padding-left: 5px;">
+					${dto.question_id} | ${dto.question_date}</td>
 			</tr>
 			<tr style="border-bottom: 1px solid #cccccc;">
 				<td colspan="2" align="left" style="padding: 10px 5px;" valign="top"
@@ -84,10 +80,8 @@
 				</tr>
 
 				<tr height="35" style="border-bottom: 1px solid #cccccc;">
-					<td width="50%" align="left" style="padding-left: 5px;">
-						${dto.answer_id}</td>
-					<td width="50%" align="right" style="padding-right: 5px;">
-						${dto.answer_date}</td>
+					<td style="padding-left: 5px;">
+						${dto.answer_id} | ${dto.answer_date}</td> 
 				</tr>
 				<tr style="border-bottom: 1px solid #cccccc;">
 					<td colspan="2" align="left" style="padding: 10px 5px;"
