@@ -64,7 +64,7 @@ public class QnaServlet extends HttpServlet{
 		req.setAttribute("dto", dto);
 		
 		if(dto.getAnswer_content() == null) {
-			if()
+			
 			req.setAttribute("answernull", "yes");
 		}
 			
