@@ -34,7 +34,7 @@
 				<div class="collapse navbar-collapse" id="navcol-1">
 					<ul class="navbar-nav">
 						<li class="nav-item"><a class="nav-link" href="#">교육소개</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">교육일정</a></li>
+						<li class="nav-item"><a class="nav-link" href=" ${pageContext.request.contextPath}/plan/plan.do">교육일정</a></li>
 						<li class="nav-item"><a class="nav-link"
 							href="${pageContext.request.contextPath}/lectureList/lectureList.do">수강신청</a></li>
 						<li class="nav-item"><a class="nav-link" href="#">커뮤니티</a></li>
