@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/temp/assets/fonts/font-awesome.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/temp/assets/fonts/ionicons.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/temp/assets/css/styles.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/temp2/assets/css/MUSA_timeline-1.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/temp2/assets/css/MUSA_timeline.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/temp2/assets/css/Bootstrap-Calendar.css">
     <link rel="icon" href="data:;base64,iVBORw0KGgo=">
     
     <script src="${pageContext.request.contextPath}/temp/assets/js/jquery.min.js"></script>
