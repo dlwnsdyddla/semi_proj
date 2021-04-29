@@ -13,7 +13,7 @@
 </head>
 <body>
 	<div class="header">
-	    <jsp:include page="/temp/header.jsp"></jsp:include>
+		<jsp:include page="/WEB-INF/views/layout/header.jsp"></jsp:include>
 	</div>
 		
 <div style="font-family: 'Source Sans Pro', sans-serif;">
