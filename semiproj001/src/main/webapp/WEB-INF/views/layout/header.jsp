@@ -52,6 +52,7 @@
 									<c:when test="${sessionScope.member.type=='a'}">
 										<a class="dropdown-item" href="${pageContext.request.contextPath}/member/memberList.do">회원리스트</a>
 										<a class="dropdown-item" href="${pageContext.request.contextPath}/regist_lecture/regist_admin_lecturelist.do">전체 강의리스트조회</a>
+										<a class="dropdown-item" href="${pageContext.request.contextPath}/approved/list.do">강의 개설 관리</a>
 									</c:when>
 								</c:choose>
 								<c:if test="${not empty sessionScope.member}">
