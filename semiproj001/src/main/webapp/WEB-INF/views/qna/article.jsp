@@ -11,7 +11,32 @@
 <title>article</title>
 <jsp:include page="/WEB-INF/views/layout/staticHeader.jsp" />
 <script type="text/javascript">
-	
+	function sendOk() {
+		var uid = "${sessionScope.member.userId}";
+		if (!uid) {
+			location.href = "${pageContext.request.contextPath}/member/login.do";
+			return;
+		}
+
+		var f = document.qnaForm;
+		var str;
+
+		str = f.content.value;
+		if (!str) {
+			alert("제목을 입력 하세요 !!!");
+			f.content.focus();
+			return;
+		}
+
+		if (!str) {
+			alert("내용을 입력 하세요 !!!");
+			f.content.focus();
+			return;
+		}
+
+		f.action = "${pageContext.request.contextPath}/qna/qna_ok.do";
+		f.submit();
+	}
 </script>
 
 </head>
@@ -24,13 +49,12 @@
 		style="padding: 13px 0px; padding-left: 21px; font-size: 21px; font-family: 'Source Sans Pro', sans-serif; font-weight: 500; font-style: normal;">
 
 	<div>
+		<!-- 질문내용 출력 -->
 		<table class="question"
 			style="width: 80%; margin: 20px auto 0px; border-spacing: 0px; border-collapse: collapse;">
 			<tr height="35"
 				style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;">
-				<td>
-				${dto.answer_title}
-				</td>
+				<td>${dto.question_title}</td>
 			</tr>
 			<tr height="35" style="border-bottom: 1px solid #cccccc;">
 				<td width="50%" align="left" style="padding-left: 5px;">
@@ -50,35 +74,70 @@
 			</tr>
 		</table>
 
-	
-		<table class="answered"
-			style="width: 80%; margin: 20px auto 0px; border-spacing: 0px; border-collapse: collapse;">
-			<tr height="35"
-				style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;">
-			<tr height="35" style="border-bottom: 1px solid #cccccc;">
-				<td width="50%" align="left" style="padding-left: 5px;">
-					${dto.answer_id}</td>
-				<td width="50%" align="right" style="padding-right: 5px;">
-					${dto.answer_date}</td>
-			</tr>
-			<tr style="border-bottom: 1px solid #cccccc;">
-				<td colspan="2" align="left" style="padding: 10px 5px;" valign="top"
-					height="200">${dto.question_content}</td>
-			</tr>
-		</table>
+		<!-- 이미 등록된 답변내용 출력-->
+		<c:if test="${dataCount!=0}">
+			<table class="answered"
+				style="width: 80%; margin: 20px auto 0px; border-spacing: 0px; border-collapse: collapse;">
+				<tr height="35"
+					style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;">
+					<td>${dto.answer_title}</td>
+				</tr>
 
+				<tr height="35" style="border-bottom: 1px solid #cccccc;">
+					<td width="50%" align="left" style="padding-left: 5px;">
+						${dto.answer_id}</td>
+					<td width="50%" align="right" style="padding-right: 5px;">
+						${dto.answer_date}</td>
+				</tr>
+				<tr style="border-bottom: 1px solid #cccccc;">
+					<td colspan="2" align="left" style="padding: 10px 5px;"
+						valign="top" height="200">${dto.question_content}</td>
+				</tr>
+			</table>
+		</c:if>
 
+		<!-- 미답변시 답변달기 폼이 보임, 클릭하면 created로 이동함 -->
 		<table class="list"
 			style="width: 80%; margin: 20px auto 0px; border-spacing: 0px; border-collapse: collapse;">
 			<tr height="35"
 				style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;">
+				<td align="left"><c:if test="${dataCount==0}">
+						<div class="container">
+							<section class="contact-clean"
+								style="background: rgb(241, 247, 252);">
+								<form name="qnaForm" method="post">
+									<h4 class="text-center">답변</h4>
+									<div class="form-group">
+										<input class="form-control" type="text" name="title"
+											placeholder="답변제목" value="${dto.answer_title}">
+									</div>
+
+									<div class="form-group">
+										<input class="form-control-plaintext" type="text"
+											value="${dto.answer_name}"
+											readonly="${sessionScope.member.userName}"
+											style="padding-left: 13px;">
+									</div>
+
+									<div class="form-group">
+										<textarea class="form-control" name="content"
+											placeholder="글쓰기" rows="14" style="height: 260px;">${dto.answer_content}</textarea>
+									</div>
+									<div class="form-group">
+										<button class="btn btn-secondary" type="submit"
+											style="background: #07689f;" onclick="sendOk();">답변 달기&nbsp;</button>
+									</div>
+								</form>
+							</section>
+						</div>
+					</c:if></td>
+
 				<td align="right">
 					<button type="button" class="btn"
 						onclick="javascript:location.href='${pageContext.request.contextPath}/qna/list.do?${query}';">리스트</button>
 				</td>
 			</tr>
 		</table>
-
 	</div>
 
 	<div class="footer">
