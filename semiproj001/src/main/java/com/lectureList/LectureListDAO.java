@@ -324,4 +324,52 @@ public class LectureListDAO {
 	}
 	
 	
+	public List<LectureListDTO> contentlist(String opened_code){
+		List<LectureListDTO> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql;
+		
+		try {
+			sql="SELECT content_code, content_title, content_detail, "
+					+ " content_round, opened_code FROM lecture_content"
+					+ " WHERE opened_code=? ";
+			
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, opened_code);
+			
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				LectureListDTO dto = new LectureListDTO();
+				dto.setContent_code(rs.getString("content_code"));
+				dto.setContent_title(rs.getString("content_title"));
+				dto.setContent_detail(rs.getString("content_detail"));
+				dto.setContent_round(rs.getInt("content_round"));
+				dto.setOpened_code(rs.getString("opened_code"));
+				list.add(dto);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(rs!=null) {
+				try {
+					rs.close();
+				} catch (Exception e2) {
+					
+				}
+			}
+			
+			if(pstmt!=null) {
+				try {
+					pstmt.close();
+				} catch (Exception e2) {
+				}
+			}
+		}
+		
+		return list;
+	
+	}
+	
 }

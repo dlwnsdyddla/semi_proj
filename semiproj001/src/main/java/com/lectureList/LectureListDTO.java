@@ -16,6 +16,12 @@ public class LectureListDTO {
 	private int maxnum;
 	private String approved;
 	private String lecture_detail;
+	private String student_id;
+	
+	private String content_code;
+	private String content_title;
+	private String content_detail;
+	private int content_round;
 	
 	public int getListNum() {
 		return listNum;
@@ -107,7 +113,35 @@ public class LectureListDTO {
 	public void setLecture_detail(String lecture_detail) {
 		this.lecture_detail = lecture_detail;
 	}
-	
-	
+	public String getStudent_id() {
+		return student_id;
+	}
+	public void setStudent_id(String student_id) {
+		this.student_id = student_id;
+	}
+	public String getContent_code() {
+		return content_code;
+	}
+	public void setContent_code(String content_code) {
+		this.content_code = content_code;
+	}
+	public String getContent_title() {
+		return content_title;
+	}
+	public void setContent_title(String content_title) {
+		this.content_title = content_title;
+	}
+	public String getContent_detail() {
+		return content_detail;
+	}
+	public void setContent_detail(String content_detail) {
+		this.content_detail = content_detail;
+	}
+	public int getContent_round() {
+		return content_round;
+	}
+	public void setContent_round(int content_round) {
+		this.content_round = content_round;
+	}
 	
 }
