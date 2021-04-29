@@ -39,7 +39,7 @@
 
 						<li class="nav-item"><a class="nav-link"
 							href="${pageContext.request.contextPath}/lectureList/lectureList.do">수강신청</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">커뮤니티</a></li>
+						<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/qna/list.do">커뮤니티</a></li>
 						<li class="nav-item dropdown"><a
 							class="dropdown-toggle nav-link" aria-expanded="false"
 							data-toggle="dropdown" href="#">마이페이지&nbsp;</a>

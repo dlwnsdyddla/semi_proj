@@ -96,7 +96,7 @@
 			</table>
 		</c:if>
 
-		<!-- 미답변시 답변달기 폼이 보임, 클릭하면 created로 이동함 -->
+		<!-- 미답변시 답변달기 폼이 보임 -->
 		<table class="list"
 			style="width: 80%; margin: 20px auto 0px; border-spacing: 0px; border-collapse: collapse;">
 			<tr height="35"
@@ -131,7 +131,11 @@
 							</section>
 						</div>
 					</c:if></td>
-
+					</tr>
+			</table>
+			<table class="list"
+			style="width: 80%; margin: 20px auto 0px; border-spacing: 0px; border-collapse: collapse;">
+			 <tr>
 				<td align="right">
 					<button type="button" class="btn"
 						onclick="javascript:location.href='${pageContext.request.contextPath}/qna/list.do?${query}';">리스트</button>
