@@ -4,31 +4,40 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
-	Calendar cal=Calendar.getInstance();
+request.setCharacterEncoding("UTF-8");
 
-	int year=cal.get(Calendar.YEAR);
-	int month=cal.get(Calendar.MONTH)+1;
-	
-	String sy=request.getParameter("year"); // year로 넘어오는것이 없으면 null
-	String sm=request.getParameter("month");
-	if(sy!=null) {
-		year=Integer.parseInt(sy);
-	}
-	if(sm!=null) {
-		month=Integer.parseInt(sm);
-	}
-	
-	cal.set(year, month-1, 1); //y년 m월 1일로 날짜 객체 설정
-	year=cal.get(Calendar.YEAR);
-	month=cal.get(Calendar.MONTH)+1;
-	
-	int lastDay=cal.getActualMaximum(Calendar.DATE);
-	int week=cal.get(Calendar.DAY_OF_WEEK); // 일(1)~토(7)
-	
-	pageContext.setAttribute("year", year);
-	pageContext.setAttribute("month", month);
-	pageContext.setAttribute("lastDay", lastDay);
-	pageContext.setAttribute("week", week);
+Calendar cal = Calendar.getInstance();
+
+int year = cal.get(Calendar.YEAR);
+int month = cal.get(Calendar.MONTH)+1;
+
+String sy = request.getParameter("year");
+String sm = request.getParameter("month");
+
+if(sy!=null) {
+	year = Integer.parseInt(sy);
+}
+if(sm!=null) {
+	month = Integer.parseInt(sm);
+}
+
+cal.set(year, month-1, 1);
+year = cal.get(Calendar.YEAR);
+month = cal.get(Calendar.MONTH)+1;
+
+int lastDate=cal.getActualMaximum(Calendar.DATE);
+int week=cal.get(Calendar.DAY_OF_WEEK); // 일(1)~토(7)
+
+Calendar preCal = (Calendar)cal.clone();
+// preCal.set(Calendar.DATE, -(week-1-1));
+preCal.add(Calendar.DATE, -(week-1));
+int preDate = preCal.get(Calendar.DATE);
+
+pageContext.setAttribute("year", year);
+pageContext.setAttribute("month", month);
+pageContext.setAttribute("lastDate", lastDate);
+pageContext.setAttribute("preDate", preDate);
+pageContext.setAttribute("week", week);
 %>
 
 <!DOCTYPE html>
@@ -71,18 +80,9 @@
   
   <div class="calendar shadow bg-white p-5">
     <div class="d-flex align-items-center">
-    	<c:url var="pre" value="plan.jsp">
-			<c:param name="year" value="${year}"/>
-			<c:param name="month" value="${month-1}"/>
-		</c:url>
-		<c:url var="next" value="plan.jsp">
-			<c:param name="year" value="${year}"/>
-			<c:param name="month" value="${month+1}"/>
-		</c:url>
-				
-        <a href="${pre}" style="margin: 0px 20px 0px 0px; border-radius: 4px; background-color: white;">◀︎</a>
+        <a href="plan.jsp?year=${year}&month=${month-1}" style="margin: 0px 20px 0px 0px; border-radius: 4px; background-color: white;">◀︎</a>
       <h2 class="month font-weight-bold mb-0 text-uppercase">${year}년 ${month}월</h2>
-        <a href="${next}" style="margin: 0px 20px 0px 20px; border-radius: 4px; background-color: white;">▶︎</a>
+        <a href="plan.jsp?year=${year}&month=${month+1}" style="margin: 0px 20px 0px 20px; border-radius: 4px; background-color: white;">▶︎</a>
     </div>
     <p class="font-italic text-muted mb-5"></p>
     <ol class="day-names list-unstyled">
@@ -96,113 +96,25 @@
     </ol>
 
     <ol class="days list-unstyled">
-      <li class="outside">
-        <div class="date">28</div>
-      </li>
-      <li class="outside">
-        <div class="date">29</div>
-      </li>
-      <li class="outside">
-        <div class="date">30</div>
-      </li>
-      <li class="outside">
-        <div class="date">31</div>
-      </li>
-      <li>
-        <div class="date">1</div>
-      </li>
-      <li>
-        <div class="date">2</div>
-      </li>
-      <li>
-        <div class="date">3</div>
-      </li>
-      <li>
-        <div class="date">4</div>
-      </li>
-      <li>
-        <div class="date">5</div>
-      </li>
-      <li>
-        <div class="date">6</div>
-      </li>
-      <li>
-        <div class="date">7</div>
-      </li>
-      <li>
-        <div class="date">8</div>
-      </li>
-      <li>
-        <div class="date">9</div>
-      </li>
-      <li>
-        <div class="date">10</div>
-      </li>
-      <li>
-        <div class="date">11</div>
-      </li>
-      <li>
-        <div class="date">12</div>
-      </li>
-      <li>
-        <div class="date">13</div>
-      </li>
-      <li>
-        <div class="date">14</div>
-      </li>
-      <li>
-        <div class="date">15</div>
-      </li>
-      <li>
-        <div class="date">16</div>
-      </li>
-      <li>
-        <div class="date">17</div>
-      </li>
-      <li>
-        <div class="date">18</div>
-      </li>
-      <li>
-        <div class="date">19</div>
-        <div class="event bg-info">개설강의조회</div>
-      </li>
-      <li>
-        <div class="date">20</div>
-      </li>
-      <li>
-        <div class="date">21</div>
-      </li>
-      <li>
-        <div class="date">22</div>
-      </li>
-      <li>
-        <div class="date">23</div>
-      </li>
-      <li>
-        <div class="date">24</div>
-      </li>
-      <li>
-        <div class="date">25</div>
-      </li>
-      <li>
-        <div class="date">26</div>
-      </li>
-      <li>
-        <div class="date">27</div>
-      </li>
-      <li>
-        <div class="date">28</div>
-      </li>
-      <li>
-        <div class="date">29</div>
-      </li>
-      <li>
-        <div class="date">30</div>
-        <div class="event bg-primary">수강신청</div>
-      </li>
-      <li class="outside">
-        <div class="date">1</div>
-      </li>
+      <c:forEach var="i" begin="1" end="${week-1}">
+			<li class='date'>${preDate}</li>
+			<c:set var="preDate" value="${preDate+1}"/>
+		</c:forEach>
+      <c:forEach var="i" begin="1" end="${lastDate}">
+			<li class='date'>${i}</li>
+			<c:set var="week" value="${week+1}"/>
+			<c:if test="${lastDate!=i && week%7==1 }">
+				<c:out value="</ol><ol>" escapeXml="false"/>
+			</c:if>
+		</c:forEach>
+      <c:set var="n" value="1"/>
+		<c:if test="${week%7!=1}">
+			<c:set var="w" value="${week%7==0?7:week%7}"/>
+			<c:forEach var="i" begin="${w}" end="7">
+				<li class='date'>${n}</li>
+				<c:set var="n" value="${n+1}"/>
+			</c:forEach>
+		</c:if>
     </ol>
   </div>
 </div>
