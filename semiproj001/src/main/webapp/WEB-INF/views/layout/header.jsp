@@ -33,8 +33,10 @@
 				</button>
 				<div class="collapse navbar-collapse" id="navcol-1">
 					<ul class="navbar-nav">
+
 						<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/main.do">교육소개</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">교육일정</a></li>
+						<li class="nav-item"><a class="nav-link" href=" ${pageContext.request.contextPath}/plan/plan.do">교육일정</a></li>
+
 						<li class="nav-item"><a class="nav-link"
 							href="${pageContext.request.contextPath}/lectureList/lectureList.do">수강신청</a></li>
 						<li class="nav-item"><a class="nav-link" href="#">커뮤니티</a></li>
@@ -42,13 +44,7 @@
 							class="dropdown-toggle nav-link" aria-expanded="false"
 							data-toggle="dropdown" href="#">마이페이지&nbsp;</a>
 							<div class="dropdown-menu">
-								<c:if test="${not empty sessionScope.member}">
-									<a class="dropdown-item"
-										href="${pageContext.request.contextPath}/member/changePwd.do">내
-										정보 관리</a>
-								</c:if>
 								<c:choose>
-								
 									<c:when test="${sessionScope.member.type=='s'}">
 										<a class="dropdown-item" href="${pageContext.request.contextPath}/regist_lecture/regist_lecturelist.do">내 강의실</a>
 									</c:when>
@@ -56,15 +52,18 @@
 										<a class="dropdown-item" href="${pageContext.request.contextPath}/regist_lecture/regist_teacher_lecturelist.do">강의리스트조회</a>	
 									</c:when>
 									<c:when test="${sessionScope.member.type=='a'}">
-										<a class="dropdown-item" href="${pageContext.request.contextPath}/regist_lecture/regist_admin_lecturelist.do">전체 강의리스트조회</a>	
+										<a class="dropdown-item" href="${pageContext.request.contextPath}/member/memberList.do">회원리스트</a>
+										<a class="dropdown-item" href="${pageContext.request.contextPath}/regist_lecture/regist_admin_lecturelist.do">전체 강의리스트조회</a>
+										<a class="dropdown-item" href="${pageContext.request.contextPath}/approved/list.do">강의 개설 관리</a>
 									</c:when>
 								</c:choose>
-								
-								
-								<a class="dropdown-item" href="#">게시물 관리</a>
-									
-								
-							</div></li>
+								<c:if test="${not empty sessionScope.member}">
+									<a class="dropdown-item" href="#">게시물 관리</a>
+									<a class="dropdown-item"href="${pageContext.request.contextPath}/member/changePwd.do">패스워드 변경</a>
+									<a class="dropdown-item"href="${pageContext.request.contextPath}/member/resign.do">회원탈퇴</a>
+								</c:if>
+							</div>
+						</li>
 					</ul>
 					<form class="form-inline mr-auto" target="_self">
 						<div class="form-group mb-0">
