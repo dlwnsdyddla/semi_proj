@@ -47,11 +47,11 @@ function sendok() {
 	        <form name="qnaForm" method="post">
 	            <h2 class="text-center">[커뮤니티]Q&A</h2>
 	            <div class="form-group"><input class="form-control" type="text" name="title" placeholder="제목"></div>
-<<<<<<< HEAD
+
 	            <div class="form-group"><input class="form-control-plaintext" type="text" value="작성자" style="padding-left: 13px;"></div>
-=======
-	            <div class="form-group"><input class="form-control-plaintext" type="text" value="작성자" readonly="" style="padding-left: 13px;"></div>
->>>>>>> refs/remotes/origin/WOO2
+
+	            <div class="form-group"><input class="form-control-plaintext" type="text" value="작성자" style="padding-left: 13px;"></div>
+
 	            <div class="form-group"><textarea class="form-control" name="content" placeholder="글쓰기" rows="14" style="height: 260px;"></textarea></div>
 	            <div class="form-group"><button class="btn btn-secondary" type="submit" style="background: #07689f;">글 올리기&nbsp;</button></div>
 	        </form>
