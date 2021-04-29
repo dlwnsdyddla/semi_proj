@@ -31,7 +31,6 @@ public class LectureListServlet extends HttpServlet {
 	protected void forward(HttpServletRequest req, HttpServletResponse resp, String path) throws ServletException, IOException {
 		RequestDispatcher rd = req.getRequestDispatcher(path);
 		rd.forward(req, resp);
-		System.out.println("여기까진 와뜸");
 	}
 	
 	protected void process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
