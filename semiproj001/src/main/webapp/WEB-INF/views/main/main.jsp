@@ -37,7 +37,7 @@
             </div>
             <div class="row people">
                 <div class="col-md-6 col-lg-4 item">
-                    <div class="box"><img class="rounded-circle" src="temp/assets/img/1024px-PyCharm_Logo.svg_.png">
+                    <div class="box"><img class="rounded-circle" src="temp/assets/img/Daco_2448537.png">
                         <h3 class="name">웹개발 종합반</h3>
                         <p class="title">초급자</p>
                         <ul>
