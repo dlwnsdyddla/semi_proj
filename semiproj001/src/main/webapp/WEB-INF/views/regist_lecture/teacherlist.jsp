@@ -18,11 +18,14 @@
 
 <input class="form-control-plaintext" type="text" value="강의 목록" style="padding: 13px 0px;padding-left: 21px;font-size: 21px;font-family: 'Source Sans Pro', sans-serif;font-weight: 500;font-style: normal;">
     <div class="list-group">  
-   	 <c:forEach var="dto" items="${list}" begin="0" end="10" step="1" varStatus="status">
+   	 <c:forEach var="dto" items="${list}" >
 		<div class="list-group-item list-group-item-action flex-column align-items-start" >
             <div class="d-flex w-100 justify-content-between">
                 <h5 class="mb-1">${dto.lecture_name}</h5><small>신청현황 : ${dto.curnum}/${dto.maxnum}</small>
-            </div><input class="float-right" type="checkbox">
+            </div>
+            <form name="lectuerForm">
+            <input class="float-right" type="checkbox" name="lecture_code" value="${dto.lecture_code}" >
+            </form>
             <p class="mb-1">${dto.teacher_name} 강사</p>
             <p class="mb-1" style="font-size: 15px;">${dto.start_date} ~ ${dto.end_date}</p><small class="text-muted">${dto.lecture_subname}</small>
         </div>

@@ -86,12 +86,10 @@ public class LectureDAO {
 		
 		try {
 			
-			sql="select list.opened_code, list.lecture_code, list.lecture_name, list.lecture_subname, approved"
-					+"  ,list.start_date, list.end_date, list.curnum, list.maxnum, l.teacher_id"
-					+" from lecture l"
-					+" join member m on m.id= l.teacher_id"
-					+" join lecture_list list on list.teacher_name=m.member_name"
-					+" where l.teacher_id =?";			
+			sql="SELECT l.lecture_code, lecture_name, lecture_subname, lecture_detail, teacher_id, TO_CHAR(start_date, 'YY-MM-DD')start_date, TO_CHAR(end_date, 'YY-MM-DD')end_date, start_time, end_time, maxnum "
+					+ " FROM lecture l "
+					+ " JOIN lecture_opened o ON l.lecture_code = o.lecture_code "
+					+ " WHERE lecture_code = ? ";			
 			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, lecture_code);
@@ -105,13 +103,15 @@ public class LectureDAO {
 				dto.setLecture_subname(rs.getString("lecture_subname"));
 				dto.setLecture_detail(rs.getString("lecture_detail"));
 				dto.setTeacher_id(rs.getString("teacher_id"));
+				dto.setStart_date(rs.getString("start_date"));
+				dto.setEnd_date(rs.getString("end_date"));
+				dto.setStart_time(rs.getString("start_time"));
+				dto.setEnd_time(rs.getString("end_time"));
+				dto.setMaxnum(rs.getInt("maxnum"));
 
-				
-				
 			}
 			
-			
-			
+				
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -291,6 +291,7 @@ public class LectureDAO {
 		
 		return result;
 	}
+	
 	
 
 	

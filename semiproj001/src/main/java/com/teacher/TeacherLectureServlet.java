@@ -140,7 +140,7 @@ public class TeacherLectureServlet extends HttpServlet{
 		try {
 			String lecture_code =req.getParameter("lecture_code");
 			
-			Regist_LectureDTO dto= (Regist_LectureDTO) dao.teacher_lecturelist(lecture_code, lecture_code, page);
+			Regist_LectureDTO dto= dao.readLecture(lecture_code);
 			
 			if(dto!=null && info.getId().equals(dto.getTeacher_id())) {
 				req.setAttribute("dto", dto);
@@ -160,7 +160,7 @@ public class TeacherLectureServlet extends HttpServlet{
 		}
 		
 		String cp= req.getContextPath();
-		resp.sendRedirect(cp+"/regist_lecture/teacherlist.do");
+		resp.sendRedirect(cp+"/regist_lecture/regist_teacher_lecturelist.do");
 	}	
 	
 	

@@ -126,7 +126,7 @@ public class Regist_LectureServlet extends HttpServlet{
 		
 		HttpSession session = req.getSession();
 		Sessioninfo info = (Sessioninfo)session.getAttribute("member"); 
-		String id = info.getId();
+		String name = info.getMember_name();
 		
 		String page = req.getParameter("page");
 		int current_page = 1;
@@ -145,7 +145,7 @@ public class Regist_LectureServlet extends HttpServlet{
 		
 		int offset = (current_page -1) *rows;
 		if(offset <0) offset =0; //ex ) 건너뛰기 10개씩
-		List<Regist_LectureDTO> list =dao.teacher_lecturelist(offset, rows, id);
+		List<Regist_LectureDTO> list =dao.teacher_lecturelist(offset, rows, name);
 		String listUrl=cp+"/regist_lecture/teacherlist.do";
 		
 		
@@ -169,10 +169,6 @@ public class Regist_LectureServlet extends HttpServlet{
 		Regist_LectureDAO dao = new Regist_LectureDAO();
 		MyUtil util = new MyUtil();
 		
-		HttpSession session = req.getSession();
-		Sessioninfo info = (Sessioninfo)session.getAttribute("member"); 
-		String id = info.getId();
-		
 		String page = req.getParameter("page");
 		int current_page = 1;
 		if(page !=null) {
@@ -190,7 +186,7 @@ public class Regist_LectureServlet extends HttpServlet{
 		
 		int offset = (current_page -1) *rows;
 		if(offset <0) offset =0; //ex ) 건너뛰기 10개씩
-		List<Regist_LectureDTO> list =dao.adminLecturelist(offset, rows, id);
+		List<Regist_LectureDTO> list =dao.adminLecturelist(offset, rows);
 		String listUrl=cp+"/regist_lecture/admin_lecturelist.do";
 		
 		

@@ -22,13 +22,12 @@
 		<div class="list-group-item list-group-item-action flex-column align-items-start" >
             <div class="d-flex w-100 justify-content-between">
                 <h5 class="mb-1">${dto.lecture_name}</h5><small>신청현황 : ${dto.curnum}/${dto.maxnum}</small>
-            </div><input class="float-right" type="checkbox">
+            </div>
             <p class="mb-1"  >${dto.teacher_name} 강사</p>
             <p class="mb-1" style="font-size: 15px;">${dto.start_date} ~ ${dto.end_date}</p><small class="text-muted">${dto.lecture_subname}</small>
         </div>
-
-       </c:forEach>
-      </div><button class="btn btn-primary float-right" type="button" style="margin-right: 23px;margin-top: 17px;margin-bottom: 0px;background: #07689f;">강의허가</button>    
+      </c:forEach>
+     </div>  
 
 	
 		 
