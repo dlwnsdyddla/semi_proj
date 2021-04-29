@@ -14,16 +14,19 @@ public class QnaDAO {
 	
 	public List<QnaDTO> qnaList() {
 		List<QnaDTO> list = new ArrayList<QnaDTO>();
-		String sql = "select qna_code, question_content, question_name, answer_name, question_date "
-				+ " from qna_content";
+		String sql = "select qna_code, opened_code, question_title, question_name, "
+				+ " question_date, answer_title, answer_name, answer_date from qna_content";
 		try(PreparedStatement pstmt = conn.prepareStatement(sql); ResultSet rs = pstmt.executeQuery()) {
 			while(rs.next()) {
 				QnaDTO dto = new QnaDTO();
-				dto.setQna_code(rs.getString("Qna_code"));
-				dto.setQuestion_content(rs.getString("question_content"));
+				dto.setQna_code(rs.getString("qna_code"));
+				dto.setOpened_code(rs.getString("opened_code"));
+				dto.setQuestion_title(rs.getString("question_title"));
 				dto.setQuestion_name(rs.getString("question_name"));
-				dto.setAnswer_name(rs.getString("answer_name"));
 				dto.setQuestion_date(rs.getString("question_date"));
+				dto.setAnswer_title(rs.getString("answer_title"));
+				dto.setAnswer_name(rs.getString("answer_name"));
+				dto.setAnswer_date(rs.getString("answer_date"));
 				list.add(dto);
 			}
 			
@@ -52,6 +55,7 @@ public class QnaDAO {
 				dto.setQuestion_date(rs.getString("question_date"));
 				dto.setAnswer_id(rs.getString("answer_id"));
 				dto.setAnswer_name(rs.getString("answer_name"));
+				dto.setAnswer_title(rs.getString("answer_title"));
 				dto.setAnswer_content(rs.getString("answer_content"));
 				dto.setAnswer_date(rs.getString("answer_date"));
 			}
@@ -64,12 +68,12 @@ public class QnaDAO {
 	
 	public int insertAnswer(String qna_code, QnaDTO dto) {
 		int result = 0;
-		String sql = "update board_qna set answer_id=?, answer_content=?, answer_date=sysdate "
+		String sql = "update board_qna set answer_id=?, answer_content=?, answer_title=?, answer_date=sysdate "
 				+ " where qna_code=?";
 		try(PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setString(1, dto.getAnswer_id());
-			pstmt.setString(2, dto.getAnswer_id());
-			pstmt.setString(3, dto.getAnswer_content());
+			pstmt.setString(2, dto.getAnswer_content());
+			pstmt.setString(3, dto.getAnswer_title());
 			pstmt.setString(4, qna_code);
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {
@@ -81,13 +85,24 @@ public class QnaDAO {
 	}
 	
 	public boolean teacherAnswer(String qna_code, String teacher_id) {
-		int result = 0;
-		String sql = "select qna_code from qna_content where qna_code=? and _id=?";
+		String sql = "select teacher_id from lecture l"
+				+ " join (select l.lecture_code, q.qna_code from qna_content q, lecture_opened o, lecture l"
+				+ " where q.opened_code = o.opened_code and o.lecture_code = l.lecture_code ) r on l.lecture_code = r.lecture_code "
+				+ " where qna_code=?";
 		ResultSet rs = null;
+		String t_id = null;
 		try(PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setString(1, qna_code);
+			rs=pstmt.executeQuery();
+			if(rs.next())
+				t_id = rs.getString("teacher_id");
+			
+			if(t_id.equals(teacher_id))
+				return true;
+			
+			
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 		
 		return false;

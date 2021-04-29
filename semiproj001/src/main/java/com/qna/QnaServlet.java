@@ -5,10 +5,15 @@ import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.member.Sessioninfo;
+
+@WebServlet("/qna/*")
 public class QnaServlet extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 
@@ -35,7 +40,7 @@ public class QnaServlet extends HttpServlet{
 			list(req, resp);
 		} else if (uri.indexOf("article.do")!=-1) {
 			article(req, resp);
-		} else if (uri.indexOf("answer_ok.do")!=-1) {
+		} else if (uri.indexOf("qna_ok.do")!=-1) {
 			insertAnswer(req, resp);
 		}
 	}
@@ -43,8 +48,11 @@ public class QnaServlet extends HttpServlet{
 	protected void list(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		QnaDAO dao = new QnaDAO();
 		List<QnaDTO> list = dao.qnaList();
+		String cp = req.getContextPath();
+		String articleUrl = cp+"/qna/article.do?page=1";
 		
 		req.setAttribute("list", list);
+		req.setAttribute("articleUrl", articleUrl);
 		
 		forward(req, resp, "/WEB-INF/views/qna/list.jsp");
 	}
@@ -53,28 +61,46 @@ public class QnaServlet extends HttpServlet{
 		QnaDAO dao = new QnaDAO();
 		String cp = req.getContextPath();
 		String qna_code = req.getParameter("qna_code");
-		String teacher_id = req.getParameter("id");
 		
 		QnaDTO dto = dao.qnaContent(qna_code);
 		if(dto==null) {
 			resp.sendRedirect(cp+"/qna/list.do");
 			return;
 		}
-		
 		req.setAttribute("dto", dto);
 		
-		if(dto.getAnswer_content() == null) {
-			
-			req.setAttribute("answernull", "yes");
+		HttpSession session = req.getSession();
+		Sessioninfo info = (Sessioninfo) session.getAttribute("member");
+		String teacher_id = null;
+		try {
+			teacher_id = info.getId();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		if(dto.getAnswer_content() == null && teacher_id != null) {
+			if(dao.teacherAnswer(qna_code, teacher_id))
+				req.setAttribute("answernull", "yes");
 		}
 			
-		
 		forward(req, resp, "/WEB-INF/views/qna/article.jsp");
 	}
 	
 	protected void insertAnswer(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		QnaDAO dao = new QnaDAO();
 		String cp = req.getContextPath();
+		String qna_code = req.getParameter("qna_code");
+		
+		QnaDTO dto = new QnaDTO();
+			dto.setAnswer_id(req.getParameter("answer_id"));
+			dto.setAnswer_title(req.getParameter("title"));
+			dto.setAnswer_content(req.getParameter("content"));
+			
+		if(dao.insertAnswer(qna_code, dto) == 0) {
+			req.setAttribute("error", "답변 중 에러 발생");
+		}
+		
+		article(req, resp);
 		
 	}
 }

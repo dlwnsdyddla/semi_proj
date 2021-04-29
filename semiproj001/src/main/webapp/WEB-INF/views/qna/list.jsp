@@ -34,25 +34,31 @@
 			      	<th width="150" style="color: #787878;">작성일</th>
 				</tr>
 				<c:forEach var="dto" items="${list}">
-				  	<tr align="center" bgcolor="#ffffff" height="35" style="border-bottom: 1px solid #cccccc;"> 
+				  	<tr align="center" bgcolor="#ffffff" height="35" 
+				  	<c:if test="${dto.answer_name == null}">
+				  	style="border-bottom: 1px solid #cccccc;"
+				  	</c:if>
+				  	> 
 					      <td>${dto.qna_code}</td>
 					      <td>${dto.opened_code}</td>
 					      <td>
-					           <a href="${articleUrl}&boardNum=${dto.qna_code}">${dto.question_title}</a>
+					           <a href="${articleUrl}&qna_code=${dto.qna_code}">${dto.question_title}</a>
 					      </td>
 					      <td>${dto.question_name}</td>
 					      <td>${dto.question_date}</td>
 				 	 </tr>
 				 	 
+				 	 <c:if test="${dto.answer_name != null}">
 				 	 <tr align="center" bgcolor="#ffffff" height="35" style="border-bottom: 1px solid #cccccc;"> 
-				 	 	<td>${dto.qna_code}</td>
-					    <td>${dto.opened_code}</td>
+				 	 	<td></td>
+					    <td></td>
 				 	 	<td>
-				 	 		<c:if test="${dto.qna_code}">└&nbsp;</c:if><a href="${articleUrl}&boardNum=${dto.qna_code}">${dto.answer_title}</a>
+				 	 		<a href="${articleUrl}&qna_code=${dto.qna_code}">└&nbsp;${dto.answer_title}</a>
 				 	 	</td>
 				 	 	<td>${dto.answer_name}</td>
 					    <td>${dto.answer_date}</td>
 				 	 </tr>
+				 	 </c:if>
 				</c:forEach>
 				
 			</table>
@@ -60,14 +66,14 @@
 			<input type="hidden" name="student_id" value="${sessionScope.member.id}">
 		</form>
 
-	<div class="paging" style="padding: 15px;">
+	<!-- <div class="paging" style="padding: 15px;">
 		<table style="width: 100%; margin: 0px auto; border-spacing: 0px;">
 			<tr height="35">
 				<td align="center">${dataCount==0?"등록된 게시물이 없습니다.":paging}</td>
 			</tr>
 		</table>
 	</div>
-	
+	-->
 	<div>
 		
 	

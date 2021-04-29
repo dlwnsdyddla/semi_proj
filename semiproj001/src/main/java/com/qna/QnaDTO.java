@@ -11,6 +11,7 @@ public class QnaDTO {
 	private String question_date;
 	private String answer_id;
 	private String answer_name;
+	private String answer_title;
 	private String answer_content;
 	private String answer_date;
 	
@@ -86,6 +87,14 @@ public class QnaDTO {
 	public void setQuestion_title(String question_title) {
 		this.question_title = question_title;
 	}
+	public String getAnswer_title() {
+		return answer_title;
+	}
+	public void setAnswer_title(String answer_title) {
+		this.answer_title = answer_title;
+	}
+	
+	
 	
 	
 }

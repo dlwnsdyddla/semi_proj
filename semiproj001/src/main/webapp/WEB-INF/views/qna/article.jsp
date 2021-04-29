@@ -12,7 +12,7 @@
 <jsp:include page="/WEB-INF/views/layout/staticHeader.jsp" />
 <script type="text/javascript">
 	function sendOk() {
-		var uid = "${sessionScope.member.userId}";
+		var uid = "${sessionScope.member.id}";
 		if (!uid) {
 			location.href = "${pageContext.request.contextPath}/member/login.do";
 			return;
@@ -20,14 +20,14 @@
 
 		var f = document.qnaForm;
 		var str;
-
-		str = f.content.value;
+		
+		str = f.title.value;
 		if (!str) {
 			alert("제목을 입력 하세요 !!!");
 			f.content.focus();
 			return;
 		}
-
+		str = f.content.value;
 		if (!str) {
 			alert("내용을 입력 하세요 !!!");
 			f.content.focus();
@@ -75,7 +75,7 @@
 		</table>
 
 		<!-- 이미 등록된 답변내용 출력-->
-		<c:if test="${dataCount!=0}">
+		<c:if test="${dto.answer_title != null}">
 			<table class="answered"
 				style="width: 80%; margin: 20px auto 0px; border-spacing: 0px; border-collapse: collapse;">
 				<tr height="35"
@@ -91,17 +91,18 @@
 				</tr>
 				<tr style="border-bottom: 1px solid #cccccc;">
 					<td colspan="2" align="left" style="padding: 10px 5px;"
-						valign="top" height="200">${dto.question_content}</td>
+						valign="top" height="200">${dto.answer_content}</td>
 				</tr>
 			</table>
 		</c:if>
 
 		<!-- 미답변시 답변달기 폼이 보임, 클릭하면 created로 이동함 -->
+		<c:if test="${answernull == 'yes' }">
 		<table class="list"
 			style="width: 80%; margin: 20px auto 0px; border-spacing: 0px; border-collapse: collapse;">
 			<tr height="35"
 				style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;">
-				<td align="left"><c:if test="${dataCount==0}">
+				<td align="left">
 						<div class="container">
 							<section class="contact-clean"
 								style="background: rgb(241, 247, 252);">
@@ -115,29 +116,34 @@
 									<div class="form-group">
 										<input class="form-control-plaintext" type="text"
 											value="${dto.answer_name}"
-											readonly="${sessionScope.member.userName}"
+											readonly="${sessionScope.member.member_name}"
 											style="padding-left: 13px;">
 									</div>
 
 									<div class="form-group">
 										<textarea class="form-control" name="content"
-											placeholder="글쓰기" rows="14" style="height: 260px;">${dto.answer_content}</textarea>
+											placeholder="글쓰기" rows="14" style="height: 260px;">${answer_content}</textarea>
 									</div>
 									<div class="form-group">
 										<button class="btn btn-secondary" type="submit"
 											style="background: #07689f;" onclick="sendOk();">답변 달기&nbsp;</button>
 									</div>
+									
+									<input type="hidden" name="qna_code" value="${dto.qna_code }">
+									<input type="hidden" name="answer_id" value="${sessionScope.member.id}">
 								</form>
 							</section>
 						</div>
-					</c:if></td>
+					</td>
 
-				<td align="right">
-					<button type="button" class="btn"
-						onclick="javascript:location.href='${pageContext.request.contextPath}/qna/list.do?${query}';">리스트</button>
-				</td>
+				
 			</tr>
 		</table>
+		</c:if>
+	<div style="text-align: right">
+	<button type="button" class="btn"
+			onclick="javascript:location.href='${pageContext.request.contextPath}/qna/list.do';">리스트</button>
+	</div>		
 	</div>
 
 	<div class="footer">
