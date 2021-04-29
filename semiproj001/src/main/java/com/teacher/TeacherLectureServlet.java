@@ -101,7 +101,7 @@ public class TeacherLectureServlet extends HttpServlet{
 		}
 		
 		String cp = req.getContextPath();
-		resp.sendRedirect(cp+"/regist_lecture/teacherlist.do?");
+		resp.sendRedirect(cp+"/regist_lecture/regist_teacher_lecturelist.do");
 		
 		
 	}
