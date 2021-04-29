@@ -75,7 +75,119 @@ public class LectureDAO {
 		}
 		return result;
 	}
+	//강의정보 가져오기 
+	public Regist_LectureDTO readLecture(String lecture_code) {
+		
+		Regist_LectureDTO dto =null;
+		PreparedStatement pstmt = null;
+		ResultSet rs= null;
+		String sql;
+		
+		
+		try {
+			
+			sql="select list.opened_code, list.lecture_code, list.lecture_name, list.lecture_subname, approved"
+					+"  ,list.start_date, list.end_date, list.curnum, list.maxnum, l.teacher_id"
+					+" from lecture l"
+					+" join member m on m.id= l.teacher_id"
+					+" join lecture_list list on list.teacher_name=m.member_name"
+					+" where l.teacher_id =?";			
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, lecture_code);
+			rs= pstmt.executeQuery();
+			
+			if(rs.next()) {
+				dto = new Regist_LectureDTO();
+				
+				dto.setLecture_code(rs.getString("lecture_code"));
+				dto.setLecture_name(rs.getString("lecture_name"));
+				dto.setLecture_subname(rs.getString("lecture_subname"));
+				dto.setLecture_detail(rs.getString("lecture_detail"));
+				dto.setTeacher_id(rs.getString("teacher_id"));
+
+				
+				
+			}
+			
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			if(rs!=null) {
+				try {
+					rs.close();
+				} catch (Exception e2) {
+					
+				}
+			}
+			if(pstmt!=null) {
+				try {
+					pstmt.close();
+				} catch (Exception e2) {
+					
+				}
+			}
+			
+			
+		}
+		
+		
+		
+		
+		return dto;
+	}
 	
+	//데이터 개수
+	public int dataCount(String id) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs =null;
+		String sql;
+		
+		
+		try {
+			
+			sql="select nvl(count(*),0) from lecture_list where teacher_id=?";
+
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			if(rs!=null) {
+				try {
+					rs.close();
+				} catch (Exception e2) {
+					
+				}
+			}
+			if(pstmt!=null) {
+				try {
+					pstmt.close();
+				} catch (Exception e2) {
+					
+				}
+			}
+			
+		}
+
+		return result;
+		
+		
+		
+	}
 	
 	//강의리스트
 	public List<Regist_LectureDTO> teacher_lecturelist(String lecture_code, String lecture_code2, String id) {

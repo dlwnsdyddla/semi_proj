@@ -241,7 +241,7 @@ public class Regist_LectureDAO {
 		String sql;
 		
 		try {
-			sql=" select l.lecture_code, start_date, end_date, start_time, end_time,  "
+			sql=" select l.lecture_code, start_date, end_date, start_time, end_time, l.lecture_subname,  "
 					+" teacher_id, l.lecture_name, l.lecture_detail, approved_date"
 					+" from lecture l "
 					+" left outer join lecture_opened o on l.lecture_code=o.lecture_code";
@@ -254,7 +254,8 @@ public class Regist_LectureDAO {
 				Regist_LectureDTO dto = new Regist_LectureDTO();
 				
 				dto.setLecture_code(rs.getString("lecture_code"));
-				dto.setLecture_name(rs.getString("lecture_code"));
+				dto.setLecture_name(rs.getString("lecture_name"));
+				dto.setLecture_subname(rs.getString("lecture_subname"));
 				dto.setTeacher_id(rs.getString("teacher_id"));
 				dto.setOpened_code(rs.getString("start_date"));
 				dto.setOpened_code(rs.getString("end_date"));
