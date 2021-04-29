@@ -50,6 +50,7 @@
 			</tr>
 		</table>
 
+	
 		<table class="answered"
 			style="width: 80%; margin: 20px auto 0px; border-spacing: 0px; border-collapse: collapse;">
 			<tr height="35"
