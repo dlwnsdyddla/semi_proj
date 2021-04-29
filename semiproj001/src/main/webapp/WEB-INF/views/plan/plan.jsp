@@ -31,7 +31,7 @@ function plan() {
 <div class="container py-5">
     
     <div>
-        <h3 style="padding-bottom: 30px;">| 교육일정</h3>
+        <h3 style="padding-bottom: 30px;">교육일정</h3>
     </div>  
   
   <div class="calendar shadow bg-white p-5">
@@ -143,7 +143,7 @@ function plan() {
 	</div>
 </div>
 <div class="footer">
-    <jsp:include page="/temp/footer.jsp"></jsp:include>
+    <jsp:include page="/WEB-INF/views/layout/footer.jsp"></jsp:include>
 </div>
 <jsp:include page="/WEB-INF/views/layout/staticFooter.jsp"/>
 </body>

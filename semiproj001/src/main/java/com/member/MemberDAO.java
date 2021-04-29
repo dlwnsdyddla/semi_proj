@@ -200,7 +200,7 @@ public class MemberDAO {
 		
 		try {
 			if(type.equals("all")) {
-				sql = " SELECT COUNT(*) FROM member ";
+				sql = " SELECT COUNT(*) FROM member WHERE not type = 'd' AND not type ='a'";
 			} else {
 				sql = " SELECT COUNT(*) FROM member WHERE type = ?";
 			}
