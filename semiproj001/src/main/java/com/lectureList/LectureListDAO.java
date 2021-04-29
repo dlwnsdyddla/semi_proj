@@ -3,6 +3,7 @@ package com.lectureList;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -237,25 +238,27 @@ public class LectureListDAO {
 		return list;
 	}
 	
-	public LectureListDTO readLecutreList(String code) {
+	public LectureListDTO readLecutreList(String opened_code) {
 		LectureListDTO dto =null;
 		PreparedStatement pstmt= null;
 		ResultSet rs = null;
 		String sql;
 		
 		try {
-			sql = "SELECT opened_code, lecture_code, lecture_name, lecture_subname, "
-					+ " teacher_name, start_date, end_date, "
-					+ " curnum, maxnum, approved "
-					+ " FROM lecture_list WHERE opened_code = ? ";
+			sql = "SELECT opened_code, lecture_name, "
+					+ " lecture_subname, teacher_name, "
+					+ " TO_CHAR(start_date,'YYYY-MM-DD') start_date,  "
+					+ " TO_CHAR(end_date, 'YYYY-MM-DD') end_date, "
+					+ " curnum, maxnum, lecture_detail "
+					+ " FROM lecture_detailed "
+					+ " WHERE opened_code = ? ";
 			pstmt=conn.prepareStatement(sql);
-			pstmt.setString(1, code);
+			pstmt.setString(1, opened_code);
 			
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
 				dto= new LectureListDTO();
 				dto.setOpened_code(rs.getString("opened_code"));
-				dto.setLecture_code(rs.getString("lecture_code"));
 				dto.setLecture_name(rs.getString("lecture_name"));
 				dto.setLecture_subname(rs.getString("lecture_subname"));
 				dto.setTeacher_name(rs.getString("teacher_name"));
@@ -263,7 +266,7 @@ public class LectureListDAO {
 				dto.setEnd_date(rs.getString("end_date"));
 				dto.setCurnum(rs.getInt("curnum"));
 				dto.setMaxnum(rs.getInt("maxnum"));
-				dto.setApproved(rs.getString("approved"));
+				dto.setLecture_detail(rs.getString("lecture_detail"));
 			}
 			
 		} catch (Exception e) {
@@ -289,5 +292,84 @@ public class LectureListDAO {
 		return dto; 
 	}
 	
+	public int registerLecture(String[] opened_codes, String student_id) throws SQLException {
+		int result = 0;
+		try {
+			conn.setAutoCommit(false);
+		} catch (Exception e) {
+		}
+		
+		for(String s: opened_codes) {
+			String sql = "insert into lecture_register values(?, ?, sysdate)";
+		
+			try(PreparedStatement pstmt = conn.prepareStatement(sql)) {
+				pstmt.setString(1, s);
+				pstmt.setString(2, student_id);
+				if(pstmt.executeUpdate()!=1) {
+					throw new Exception();	
+				}
+				result++;
+			} catch (Exception e) {
+				e.printStackTrace();
+				conn.rollback();
+				return 0;
+			}
+		}
+		try {
+			conn.commit();
+		} catch (Exception e) {
+		}
+		
+		return result;
+	}
+	
+	
+	public List<LectureListDTO> contentlist(String opened_code){
+		List<LectureListDTO> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql;
+		
+		try {
+			sql="SELECT content_code, content_title, content_detail, "
+					+ " content_round, opened_code FROM lecture_content"
+					+ " WHERE opened_code=? ";
+			
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, opened_code);
+			
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				LectureListDTO dto = new LectureListDTO();
+				dto.setContent_code(rs.getString("content_code"));
+				dto.setContent_title(rs.getString("content_title"));
+				dto.setContent_detail(rs.getString("content_detail"));
+				dto.setContent_round(rs.getInt("content_round"));
+				dto.setOpened_code(rs.getString("opened_code"));
+				list.add(dto);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(rs!=null) {
+				try {
+					rs.close();
+				} catch (Exception e2) {
+					
+				}
+			}
+			
+			if(pstmt!=null) {
+				try {
+					pstmt.close();
+				} catch (Exception e2) {
+				}
+			}
+		}
+		
+		return list;
+	
+	}
 	
 }

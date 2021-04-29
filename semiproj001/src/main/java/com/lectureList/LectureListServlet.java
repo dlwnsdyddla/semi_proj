@@ -31,6 +31,7 @@ public class LectureListServlet extends HttpServlet {
 	protected void forward(HttpServletRequest req, HttpServletResponse resp, String path) throws ServletException, IOException {
 		RequestDispatcher rd = req.getRequestDispatcher(path);
 		rd.forward(req, resp);
+		System.out.println("여기까진 와뜸");
 	}
 	
 	protected void process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -42,6 +43,8 @@ public class LectureListServlet extends HttpServlet {
 			list(req, resp);
 		} else if (uri.indexOf("lectureDetailed.do")!=-1) {
 			lecture_detailed(req, resp);
+		} else if (uri.indexOf("register.do")!=-1) {
+			lecture_register(req, resp);
 		}
 	}
 	
@@ -91,10 +94,10 @@ public class LectureListServlet extends HttpServlet {
 			list=dao.listLecture(offset, rows, condition, keyword);
 		}
 		
-		int curnum, n=0;
+		int listnum, n=0;
 		for(LectureListDTO dto: list) {
-			curnum = dataCount - (offset+n);
-			dto.setCurnum(curnum);
+			listnum = dataCount - (offset+n);
+			dto.setListNum(listnum);
 			n++;
 		}
 		
@@ -102,11 +105,11 @@ public class LectureListServlet extends HttpServlet {
 		if(keyword.length()!=0) {
 			query="condition="+condition+"&keyword="+URLEncoder.encode(keyword, "utf-8");
 		}
-		String listUrl = cp +"lectureList/lectureList.do";
-		String articleUrl = cp+"lectureList/lectureDetailed.do?page="+current_page;
+		String listUrl = cp +"/lectureList/lectureList.do";
+		String articleUrl = cp+"/lectureList/lectureDetailed.do?page="+current_page;
 		if(query.length()!=0) {
 			listUrl+="?"+query;
-			articleUrl+="&"+articleUrl;
+			articleUrl+="&"+query;
 		}
 		String paging = util.paging(current_page, total_page, listUrl);
 		
@@ -118,6 +121,7 @@ public class LectureListServlet extends HttpServlet {
 		req.setAttribute("articleUrl", articleUrl);
 		req.setAttribute("condition", condition);
 		req.setAttribute("keyword", keyword);
+		req.setAttribute("mode", "register");
 		
 		forward(req, resp, "/WEB-INF/views/lectureList/lectureList.jsp");
 		
@@ -130,7 +134,8 @@ public class LectureListServlet extends HttpServlet {
 		String query= "page="+page;
 		
 		try {
-			String code= req.getParameter("opened_code");
+
+			String opened_code= req.getParameter("opened_code");
 			
 			String condition = req.getParameter("condition");
 			String keyword = req.getParameter("keyword");
@@ -145,13 +150,21 @@ public class LectureListServlet extends HttpServlet {
 				query+="&condition="+condition+"&keyword="+URLEncoder.encode(keyword, "utf-8");
 			}
 			
-			LectureListDTO dto = dao.readLecutreList(code);
+			LectureListDTO dto = dao.readLecutreList(opened_code);
+			
+			List<LectureListDTO> list = dao.contentlist(opened_code);
+			
+			for(LectureListDTO dto1: list) {
+				dto1.setOpened_code(opened_code);
+			}
+			
 			if(dto==null) {
 				resp.sendRedirect(cp+"/lectureList/lecturelist.do?"+query);
 				return;
 			}
-			dto.setLecture_detail(dto.getLecture_detail().replace("\n", "<br>"));
+			//dto.setLecture_detail(dto.getLecture_detail().replace("\n", "<br>"));
 			
+			req.setAttribute("list", list);
 			req.setAttribute("dto", dto);
 			req.setAttribute("page", page);
 			req.setAttribute("query", query);
@@ -159,6 +172,27 @@ public class LectureListServlet extends HttpServlet {
 			forward(req, resp, "/WEB-INF/views/lectureList/lectureDetailed.jsp");
 			return;
 			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	protected void lecture_register(HttpServletRequest req, HttpServletResponse resp) {
+		String[] opened_codes = req.getParameterValues("opened_code");
+		String student_id = req.getParameter("student_id");
+		int result = 0;
+		try {
+			LectureListDAO dao = new LectureListDAO();
+			result = dao.registerLecture(opened_codes, student_id);
+			System.out.println(result);
+			if(result == 0) {
+				req.setAttribute("error", "수강 신청 중 오류 발생 - 이미 수강 중인 강의가 존재합니다.");
+				forward(req, resp, "/WEB-INF/views/lectureList/fail.jsp");
+				return;
+			}
+			String cp = req.getContextPath();
+			resp.sendRedirect(cp+"/lectureList/lectureList.do");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
