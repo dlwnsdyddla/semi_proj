@@ -9,7 +9,7 @@
 <title>login</title>
 <jsp:include page="/WEB-INF/views/layout/staticHeader.jsp"/>
 <script type="text/javascript">
-function changePwd() {
+function send_ok() {
 	var f = document.changePwdForm;
 	var str;
 	
@@ -69,7 +69,7 @@ function changePwd() {
             <div class="form-group"><input class="form-control" type="password" name="newPwd" placeholder="새 비밀번호"></div>
             <div class="form-group"><input class="form-control" type="password" name="newPwdOk" placeholder="새 비밀번호 확인"></div>
             <div class="form-group" style="color: red;"> ${result} </div>
-            <div class="form-group"><button class="btn btn-primary btn-block" type="button" onclick="changePwd();" style="background: #07689f;">비밀번호 변경하기</button></div>
+            <div class="form-group"><button class="btn btn-primary btn-block" type="button" onclick="send_ok();" style="background: #07689f;">비밀번호 변경하기</button></div>
         </form>
     </section>
 </div>
