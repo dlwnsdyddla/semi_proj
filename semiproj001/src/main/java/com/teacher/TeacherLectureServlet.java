@@ -84,18 +84,21 @@ public class TeacherLectureServlet extends HttpServlet{
 		
 		
 		try {
-			
+			dto.setTeacher_id(info.getId());
 			dto.setLecture_code(req.getParameter("lecture_code"));
 			dto.setLecture_name(req.getParameter("lecture_name"));
 			dto.setLecture_subname(req.getParameter("lecture_subname"));
 			dto.setLecture_detail(req.getParameter("lecture_detail"));
-			dto.setTeacher_id(info.getId());
 			
+			dto.setOpened_code(req.getParameter("lecture_code")); // 일단 급한대로 opened_code는 lecture_code와 동일하게 설정했습니다.
+			dto.setStart_date(req.getParameter("start_date"));
+			dto.setEnd_date(req.getParameter("end_date"));
+			dto.setStart_time(req.getParameter("start_time"));
+			dto.setEnd_time(req.getParameter("end_time"));
+			dto.setMaxnum( Integer.parseInt(req.getParameter("maxnum")));
+
 			dao.insertLecture(dto);
-			
-			
-			
-			
+		
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

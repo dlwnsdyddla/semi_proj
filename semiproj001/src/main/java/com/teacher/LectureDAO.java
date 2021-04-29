@@ -25,6 +25,7 @@ public class LectureDAO {
 		String sql;
 		
 		try {
+			conn.setAutoCommit(false);
 			sql=" insert into lecture(lecture_code, lecture_name, lecture_subname, lecture_detail, teacher_id )"
 					+ " values(?,?,?,?,?)";
 			
@@ -36,11 +37,25 @@ public class LectureDAO {
 			pstmt.setString(4, dto.getLecture_detail());
 			pstmt.setString(5, dto.getTeacher_id());
 			
+			result = pstmt.executeUpdate();
+			
+			result = 0;
+			pstmt = null;
+			
+			sql = " INSERT INTO lecture_opened(opened_code, lecture_code, start_date, end_date, start_time, end_time, maxnum) "
+					+ " VALUES (?, ?, ?, ?, ?, ?, ?) ";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, dto.getOpened_code());
+			pstmt.setString(2, dto.getLecture_code());
+			pstmt.setString(3, dto.getStart_date());
+			pstmt.setString(4, dto.getEnd_date());
+			pstmt.setString(5, dto.getStart_time());
+			pstmt.setString(6, dto.getEnd_time());
+			pstmt.setInt(7, dto.getMaxnum());
 			
 			result = pstmt.executeUpdate();
 			
-			
-			
+			conn.commit();
 		}catch (Exception e) {
 			e.printStackTrace();
 			try {

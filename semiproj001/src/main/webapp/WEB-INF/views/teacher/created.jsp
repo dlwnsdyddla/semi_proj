@@ -35,6 +35,21 @@
             <div class="form-group"><input class="form-control" type="text" name="lecture_subname" placeholder="부제목" value="${lecture_subname}"></div>
             <div class="form-group"><textarea class="form-control" name="lecture_detail" placeholder="상세설명" rows="14" style="height: 260px;">${lecture_detail}</textarea></div>
             
+            <!-- 추가된부분 -->
+            <table>
+            	<tr>
+            		<td><div class="form-group"> 강의시작일 <input class="form-control" type="date" name="start_date" value=""></div></td>
+            		<td><div class="form-group"> 시작시간 <input class="form-control" type="text" name="start_time"></div></td>
+            	</tr>
+            	<tr>
+            		<td><div class="form-group"> 강의종료일 <input class="form-control" type="date" name="end_date" value=""></div></td>
+            		<td><div class="form-group"> 종료시간 <input class="form-control" type="text" name="end_time"></div></td>
+            	</tr>
+            	<tr>
+            		<td><div class="form-group"> 최대 인원수 <input class="form-control" type="text" name="maxnum"></div></td>
+            	</tr>
+            </table>
+            
             <div class="form-group"><button class="btn btn-secondary" type="submit" style="background: #07689f;" onclick="sendOk();">${mode=='update'?'수정' :'등록신청'}&nbsp;</button></div>
             <div class="form-group"><button class="btn btn-secondary" type="submit" style="background: #07689f;" onclick="javascript:location.href='${pageContext.request.contextPath}/regist_lecture/teacherlist.do'">뒤로가기&nbsp;</button></div>
         </form>
