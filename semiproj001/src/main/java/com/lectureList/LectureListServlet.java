@@ -31,6 +31,7 @@ public class LectureListServlet extends HttpServlet {
 	protected void forward(HttpServletRequest req, HttpServletResponse resp, String path) throws ServletException, IOException {
 		RequestDispatcher rd = req.getRequestDispatcher(path);
 		rd.forward(req, resp);
+		System.out.println("여기까진 와뜸");
 	}
 	
 	protected void process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -133,6 +134,7 @@ public class LectureListServlet extends HttpServlet {
 		String query= "page="+page;
 		
 		try {
+
 			String opened_code= req.getParameter("opened_code");
 			
 			String condition = req.getParameter("condition");
@@ -149,12 +151,20 @@ public class LectureListServlet extends HttpServlet {
 			}
 			
 			LectureListDTO dto = dao.readLecutreList(opened_code);
+			
+			List<LectureListDTO> list = dao.contentlist(opened_code);
+			
+			for(LectureListDTO dto1: list) {
+				dto1.setOpened_code(opened_code);
+			}
+			
 			if(dto==null) {
 				resp.sendRedirect(cp+"/lectureList/lecturelist.do?"+query);
 				return;
 			}
 			//dto.setLecture_detail(dto.getLecture_detail().replace("\n", "<br>"));
 			
+			req.setAttribute("list", list);
 			req.setAttribute("dto", dto);
 			req.setAttribute("page", page);
 			req.setAttribute("query", query);
