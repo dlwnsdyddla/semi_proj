@@ -57,7 +57,7 @@
 	<div class="container">
 		<section class="contact-clean" style="background: rgb(241, 247, 252);">
 			<form name="qnaForm" method="post">
-				<h2 class="text-center">[커뮤니티]Q&A</h2>
+				<h2 class="text-center">[커뮤니티]QnA</h2>
 				<div class="form-group">
 					<input class="form-control" type="text" name="qna_code"
 						placeholder="질문코드">
