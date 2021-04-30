@@ -2,7 +2,6 @@ package com.approved;
 
 import java.io.IOException;
 import java.net.URLDecoder;
-import java.net.URLEncoder;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -16,7 +15,6 @@ import javax.servlet.http.HttpSession;
 import com.lectureList.LectureListDAO;
 import com.lectureList.LectureListDTO;
 import com.member.Sessioninfo;
-import com.util.MyUtil;
 
 @WebServlet("/approved/*")
 public class ApprovedServlet extends HttpServlet{
