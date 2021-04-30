@@ -190,6 +190,12 @@ public class TeacherLectureServlet extends HttpServlet{
 			dto.setLecture_detail(req.getParameter("lecutre_detail"));
 			dto.setTeacher_id(info.getId());
 			
+			dto.setStart_date(req.getParameter("start_date"));
+			dto.setEnd_date(req.getParameter("end_date"));
+			dto.setStart_time(req.getParameter("start_time"));
+			dto.setEnd_time(req.getParameter("end_time"));
+			dto.setMaxnum(Integer.parseInt( req.getParameter("maxnum")));
+			
 			dao.updateLecture(dto, info.getId());
 			
 			

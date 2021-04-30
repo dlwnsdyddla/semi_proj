@@ -263,13 +263,13 @@ public class LectureDAO {
 		String sql;
 		
 		try {
+			conn.setAutoCommit(false);
 			
 			sql ="update lecture set lecture_name=? ,lecture_subname=? "
 					+ " , lecture_detail=?"
 					+ " where teacher_id=? AND lecture_code=?";
 			
 			pstmt = conn.prepareStatement(sql);
-			
 			pstmt.setString(1, dto.getLecture_name());
 			pstmt.setString(2, dto.getLecture_subname());
 			pstmt.setString(3, dto.getLecture_detail());
@@ -278,7 +278,28 @@ public class LectureDAO {
 			
 			result= pstmt.executeUpdate();
 			
+			pstmt = null;
+			result = 0 ;
+			
+			sql ="update lecture_opened set start_date = ?, end_date = ?, start_time = ?, end_time = ?, maxnum = ? "
+					+ " where lecture_code=? ";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, dto.getStart_date());
+			pstmt.setString(2, dto.getEnd_date());
+			pstmt.setString(3, dto.getStart_time());
+			pstmt.setString(4, dto.getEnd_time());
+			pstmt.setInt(5, dto.getMaxnum());
+			pstmt.setString(6, dto.getLecture_code());
+			
+			result= pstmt.executeUpdate();
+	
+			conn.commit();
 		} catch (Exception e) {
+			try {
+				conn.rollback();
+			} catch (Exception e2) {
+			}
 			e.printStackTrace();
 		}finally {
 			if(pstmt!=null) {

@@ -41,15 +41,15 @@
             <!-- 추가된부분 -->
             <table>
             	<tr>
-            		<td><div class="form-group"> 강의시작일 <input class="form-control" type="date" name="start_date" value=""></div></td>
-            		<td><div class="form-group"> 시작시간 <input class="form-control" type="text" name="start_time"></div></td>
+            		<td><div class="form-group"> 강의시작일 <input class="form-control" type="date" name="start_date" value="${dto.start_date}"></div></td>
+            		<td><div class="form-group"> 시작시간 <input class="form-control" type="text" name="start_time" value="${dto.start_time}"></div></td>
             	</tr>
             	<tr>
-            		<td><div class="form-group"> 강의종료일 <input class="form-control" type="date" name="end_date" value=""></div></td>
-            		<td><div class="form-group"> 종료시간 <input class="form-control" type="text" name="end_time"></div></td>
+            		<td><div class="form-group"> 강의종료일 <input class="form-control" type="date" name="end_date" value="${dto.end_date}"></div></td>
+            		<td><div class="form-group"> 종료시간 <input class="form-control" type="text" name="end_time" value="${dto.end_time}"></div></td>
             	</tr>
             	<tr>
-            		<td><div class="form-group"> 최대 인원수 <input class="form-control" type="text" name="maxnum"></div></td>
+            		<td><div class="form-group"> 최대 인원수 <input class="form-control" type="text" name="maxnum" value="${dto.maxnum}"></div></td>
             	</tr>
             </table>
 
