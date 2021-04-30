@@ -12,30 +12,36 @@
 <jsp:include page="/WEB-INF/views/layout/staticHeader.jsp" />
 <script type="text/javascript">
 	function sendok() {
+		var uid = "${sessionScope.member.id}";
+		if (!uid) {
+			location.href = "${pageContext.request.contextPath}/member/login.do";
+			return;
+		}
+		
 		var f = document.qnaForm;
 
-		var str = f.title.value;
+		var str = f.opened_code.value;
 		if (!str) {
-			alert("강의 코드를 입력하세요. ");
+			alert("개설 코드를 입력하세요. ");
 			f.subject.focus();
 			return;
 		}
 		
-		var str = f.subject.value;
+		var str = f.title.value;
 		if (!str) {
 			alert("질문제목을 입력하세요. ");
 			f.subject.focus();
 			return;
 		}
 
-		str = f.content.value;
+		str = f.question_content.value;
 		if (!str) {
 			alert("질문내용을 입력하세요. ");
 			f.content.focus();
 			return;
 		}
 
-		f.action = "${pageContext.request.contextPath}/qna/${mode}_ok.do";
+		f.action = "${pageContext.request.contextPath}/qna/created_ok.do";
 
 		f.submit();
 	}
@@ -53,32 +59,39 @@
 			<form name="qnaForm" method="post">
 				<h2 class="text-center">[커뮤니티]Q&A</h2>
 				<div class="form-group">
-					<input class="form-control" type="text" name="title"
-						placeholder="강의코드" value="${dto.qna_code}">
+					<input class="form-control" type="text" name="qna_code"
+						placeholder="질문코드">
 				</div>
 				
 				<div class="form-group">
-					<input class="form-control" type="text" name="subject"
-						placeholder="제목" value="${dto.question_title}">
+					<input class="form-control" type="text" name="opened_code"
+						placeholder="개설코드">
+				</div>
+				
+				<div class="form-group">
+					<input class="form-control" type="text" name="title"
+						placeholder="제목" >
 				</div>
 
 				<div class="form-group">
-					<input class="form-control-plaintext" type="text" value="${dto.question_name}"
+					<input class="form-control-plaintext" type="text"
 						readonly="${sessionScope.member.member_name}" placeholder="${sessionScope.member.member_name}"
 						style="padding-left: 13px;">
 				</div>
+				
+				<input type="hidden" name="question_id" value="${sessionScope.member.id}">
 
 				<div class="form-group">
-					<textarea class="form-control" name="content" placeholder="글쓰기"
-						rows="14" style="height: 260px;">${dto.question_content}</textarea>
+					<textarea class="form-control" name="question_content" placeholder="글쓰기"
+						rows="14" style="height: 260px;"></textarea>
 				</div>
 				<div class="form-group" style="justify-content: space-between;">
 					<span>
-					<button class="btn btn-secondary" type="submit"
+					<button class="btn btn-secondary" type="button"
 						style="background: #07689f;" onclick="sendok();">글 올리기&nbsp;</button>
 					</span>	
 					<span style="padding-left: 66%">
-					<button class="btn btn-secondary" style="background: #F1F7FC; color: black;" 
+					<button type="button" class="btn btn-secondary" style="background: #F1F7FC; color: black;" 
 					onclick="javascript:location.href='${pageContext.request.contextPath}/qna/list.do';">리스트</button>
 					</span>
 				</div>

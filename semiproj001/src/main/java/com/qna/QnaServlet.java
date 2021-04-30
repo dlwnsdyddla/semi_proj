@@ -119,19 +119,17 @@ public class QnaServlet extends HttpServlet{
 		String cp = req.getContextPath();
 		
 		HttpSession session = req.getSession();
-		Sessioninfo info= (Sessioninfo) session.getAttribute("member_name");
+		Sessioninfo info= (Sessioninfo) session.getAttribute("member");
 		QnaDAO dao = new QnaDAO();
 		
 		
 		try {
 			QnaDTO dto = new QnaDTO();
 			
-			dto.setQuestion_id(info.getId());
-			
 			dto.setQna_code(req.getParameter("qna_code"));
+			dto.setOpened_code(req.getParameter("opened_code"));
 			dto.setQuestion_id(req.getParameter("question_id"));
-			dto.setQuestion_name(req.getParameter("question_name"));
-			dto.setQuestion_title(req.getParameter("question_title"));
+			dto.setQuestion_title(req.getParameter("title"));
 			dto.setQuestion_content(req.getParameter("question_content"));
 			
 			dao.insertQuestion(dto);

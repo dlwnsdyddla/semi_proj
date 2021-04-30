@@ -16,7 +16,8 @@ public class QnaDAO {
 	public List<QnaDTO> qnaList() {
 		List<QnaDTO> list = new ArrayList<QnaDTO>();
 		String sql = "select qna_code, opened_code, question_title, question_name, "
-				+ " question_date, answer_title, answer_name, answer_date from qna_content";
+				+ " question_date, answer_title, answer_name, answer_date from qna_content"
+				+ " order by question_date desc ";
 		try(PreparedStatement pstmt = conn.prepareStatement(sql); ResultSet rs = pstmt.executeQuery()) {
 			while(rs.next()) {
 				QnaDTO dto = new QnaDTO();
@@ -111,13 +112,13 @@ public class QnaDAO {
 	
 	public int insertQuestion(QnaDTO dto) throws SQLException {
 		int result = 0;
-		String sql = "INSERT INTO board_qna(qna_code, question_id, question_name, "
+		String sql = "INSERT INTO board_qna(qna_code, opened_code, question_id, "
 				+ "question_title, question_content, question_date) "
 				+ " VALUES(?,?,?,?,?,SYSDATE) ";
 		try(PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setString(1, dto.getQna_code());
-			pstmt.setString(2, dto.getQuestion_id());
-			pstmt.setString(3, dto.getQuestion_name());
+			pstmt.setString(2, dto.getOpened_code());
+			pstmt.setString(3, dto.getQuestion_id());
 			pstmt.setString(4, dto.getQuestion_title());
 			pstmt.setString(5, dto.getQuestion_content());
 			result = pstmt.executeUpdate();
