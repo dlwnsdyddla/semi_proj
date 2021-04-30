@@ -48,6 +48,7 @@ public class QnaServlet extends HttpServlet{
 		if(type==null || type.equals("d")) {
 			req.setAttribute("error", "비회원은 접근 불가");
 			resp.sendRedirect(cp+"/member/login.do");
+			return;
 		}
 		
 		if(uri.indexOf("list.do")!=-1) {
