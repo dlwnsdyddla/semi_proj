@@ -25,10 +25,10 @@
             </div>
             <p class="mb-1"  >${dto.teacher_name} 강사</p>
             <p class="mb-1" style="font-size: 15px;">${dto.start_date} ~ ${dto.end_date}</p><small class="text-muted">${dto.lecture_subname}</small>
+    		 <button class="btn btn-primary float-right" type="button" style="margin-right: 23px;margin-top: 17px;margin-bottom: 0px;background: #07689f;">수강생조회</button> 
         </div>
       </c:forEach>
      </div>  
-     <button class="btn btn-primary float-right" type="button" style="margin-right: 23px;margin-top: 17px;margin-bottom: 0px;background: #07689f;">수강생조회</button> 
 
 	
 		 
