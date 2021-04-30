@@ -40,14 +40,15 @@ public class ApprovedServlet extends HttpServlet{
 	protected void process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
 		String uri = req.getRequestURI();
+		String cp = req.getContextPath();
 		
 		try {
 			HttpSession session = req.getSession();
 			Sessioninfo info = (Sessioninfo) session.getAttribute("member");
 			String type = info.getType();
 			if(!type.equals("a")) {
-				System.out.println("관리자 이외에 접근할 수 없습니다.");
 				req.setAttribute("error", "관리자 이외에 접근할 수 없습니다.");
+				resp.sendRedirect(cp+"/member/login.do");
 				return;
 			}
 			String admin_id = info.getId();
