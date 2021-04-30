@@ -34,7 +34,7 @@
 			return;
 		}
 
-		f.action = "${pageContext.request.contextPath}/qna/qna_ok.do";
+		f.action = "${pageContext.request.contextPath}/qna/${mode}_ok.do";
 		f.submit();
 	}
 </script>
@@ -52,13 +52,13 @@
 		<!-- 질문내용 출력 -->
 		<table class="question"
 			style="width: 80%; margin: 20px auto 0px; border-spacing: 0px; border-collapse: collapse;">
-			<tr height="35"
-				style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;">
-				<td>${dto.question_title}</td>
-			</tr>
 			<tr height="35" style="border-bottom: 1px solid #cccccc;">
-				<td style="padding-left: 5px;">
-					${dto.qna_code} | ${dto.opened_code}</td>
+				<td style="padding-left: 5px; background: #183177; color: white; text-align: center;">
+					${dto.qna_code} | ${dto.opened_code} </td>
+			</tr>
+			<tr height="35"
+				style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc; background: #cccccc;">
+				<td>${dto.question_title}</td>
 			</tr>
 			<tr height="35" style="border-bottom: 1px solid #cccccc;">
 				<td style="padding-left: 5px;">
@@ -73,9 +73,9 @@
 		<!-- 이미 등록된 답변내용 출력-->
 		<c:if test="${dto.answer_title != null}">
 			<table class="answered"
-				style="width: 80%; margin: 20px auto 0px; border-spacing: 0px; border-collapse: collapse;">
+				style="width: 80%; margin: 40px auto 0px; border-spacing: 0px; border-collapse: collapse;">
 				<tr height="35"
-					style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;">
+					style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc; background: #cccccc;">
 					<td>${dto.answer_title}</td>
 				</tr>
 
@@ -93,7 +93,7 @@
 		<!-- 미답변시 답변달기 폼이 보임, 클릭하면 created로 이동함 -->
 		<c:if test="${answernull == 'yes' }">
 		<table class="list"
-			style="width: 80%; margin: 20px auto 0px; border-spacing: 0px; border-collapse: collapse;">
+			style="width: 80%; margin: 40px auto 0px; border-spacing: 0px; border-collapse: collapse;">
 			<tr height="35"
 				style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;">
 				<td align="left">
@@ -134,8 +134,8 @@
 			</tr>
 		</table>
 		</c:if>
-	<div style="text-align: right">
-	<button type="button" class="btn"
+	<div style="text-align: right; width: 90%; padding-top: 20px;">
+	<button type="button" class="btn" style="background: #1F90A3; border: #1F90A3; color: white;"
 			onclick="javascript:location.href='${pageContext.request.contextPath}/qna/list.do';">리스트</button>
 	</div>		
 	</div>

@@ -22,16 +22,16 @@
 
 	<input class="form-control-plaintext" type="text" value="[커뮤니티] Q&A"
 		style="padding: 13px 0px; padding-left: 21px; font-size: 21px; font-family: 'Source Sans Pro', sans-serif; font-weight: 500; font-style: normal;">
-
+	
 		<form name="qna">
-			<div class="list-group">
+			<div class="list-group" style="padding-top:30px;">
 			<table style="width: 70%; margin: 0px auto; border-spacing: 0px; border-collapse: collapse;">
-				<tr align="center" bgcolor="#eeeeee" height="35" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 			
-					<th width="150" style="color: #787878;">질문번호</th>
-					<th width="150" style="color: #787878;">강의번호</th>
-			     	<th style="color: #787878;">제목</th>
-			      	<th width="150" style="color: #787878;">작성자</th>
-			      	<th width="150" style="color: #787878;">작성일</th>
+				<tr align="center" bgcolor="#eeeeee" height="35" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc; background: #183177;"> 			
+					<th width="100" style="color: white;">질문번호</th>
+					<th width="100" style="color: white;">강의번호</th>
+			     	<th style="color: white;">제목</th>
+			      	<th width="150" style="color: white;">작성자</th>
+			      	<th width="150" style="color: white;">작성일</th>
 				</tr>
 				<c:forEach var="dto" items="${list}">
 				  	<tr align="center" bgcolor="#ffffff" height="35" 
@@ -61,19 +61,19 @@
 				 	 </c:if>
 				</c:forEach>
 				
+								
 			</table>
 			</div>
+			
+			<div style="text-align: right; width: 85%; padding-top: 20px;">
+				<button type="button" class="btn" style="background: #1F90A3; border: #1F90A3; color: white;"
+				onclick="javascript:location.href='${pageContext.request.contextPath}/qna/created.do';">답변달기</button>
+			</div>	
+			
 			<input type="hidden" name="student_id" value="${sessionScope.member.id}">
 		</form>
 
-	<!-- <div class="paging" style="padding: 15px;">
-		<table style="width: 100%; margin: 0px auto; border-spacing: 0px;">
-			<tr height="35">
-				<td align="center">${dataCount==0?"등록된 게시물이 없습니다.":paging}</td>
-			</tr>
-		</table>
-	</div>
-	-->
+	
 	<div>
 		
 	
