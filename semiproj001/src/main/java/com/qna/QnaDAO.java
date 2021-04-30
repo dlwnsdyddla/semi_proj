@@ -3,6 +3,7 @@ package com.qna;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -106,5 +107,26 @@ public class QnaDAO {
 		}
 		
 		return false;
+	}
+	
+	public int insertQuestion(QnaDTO dto) throws SQLException {
+		int result = 0;
+		String sql = "INSERT INTO board_qna(qna_code, question_id, question_name, "
+				+ "question_title, question_content, question_date) "
+				+ " VALUES(?,?,?,?,?,SYSDATE) ";
+		try(PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, dto.getQna_code());
+			pstmt.setString(2, dto.getQuestion_id());
+			pstmt.setString(3, dto.getQuestion_name());
+			pstmt.setString(4, dto.getQuestion_title());
+			pstmt.setString(5, dto.getQuestion_content());
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		
+		return result;
+		
 	}
 }

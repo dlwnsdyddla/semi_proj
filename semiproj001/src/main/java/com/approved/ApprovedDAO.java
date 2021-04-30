@@ -73,6 +73,7 @@ public class ApprovedDAO {
 		String sql = "update lecture_opened set approved_date=sysdate, approver_id=? "
 				+ " where opened_code =?";
 		try(PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			conn.setAutoCommit(false);
 			pstmt.setString(1, admin_id);
 			pstmt.setString(2, opened_code);
 			result = pstmt.executeUpdate();
@@ -89,6 +90,7 @@ public class ApprovedDAO {
 		int result = 0;
 		String sql = "delete from lecture_opened where opened_code=?";
 		try(PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			conn.setAutoCommit(false);
 			pstmt.setString(1, opened_code);
 			result = pstmt.executeUpdate();
 			if(result!=0)
