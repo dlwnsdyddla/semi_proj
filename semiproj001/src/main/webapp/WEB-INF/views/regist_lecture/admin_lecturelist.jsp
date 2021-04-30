@@ -28,6 +28,7 @@
         </div>
       </c:forEach>
      </div>  
+     <button class="btn btn-primary float-right" type="button" style="margin-right: 23px;margin-top: 17px;margin-bottom: 0px;background: #07689f;">수강생조회</button> 
 
 	
 		 
