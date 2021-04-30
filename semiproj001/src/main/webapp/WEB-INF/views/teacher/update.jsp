@@ -32,11 +32,11 @@
 	<section class="contact-clean" style="background: rgb(241,247,252);">
         <form name="lectureSubmit" method="post">
             <h2 class="text-center">${mode=='update'? '강의수정하기':'강의등록' }</h2>      	
-            <div class="form-group"><input class="form-control" type="text" name="lecture_name" placeholder="강의명"  value="${lecture_name}"></div>
-            <div class="form-group"><input class="form-control" type="text" name="lecture_code" placeholder="강의코드입력"  value="${lecture_code}"></div>
+            <div class="form-group"><input class="form-control" type="text" name="lecture_name" placeholder="강의명"  value="${dto.lecture_name}"></div>
+            <div class="form-group"><input class="form-control" type="text" name="lecture_code" placeholder="강의코드입력"  value="${dto.lecture_code}"></div>
             <div class="form-group"><input class="form-control-plaintext" type="text" value=" ${sessionScope.member.id} 님" readonly="readonly" style="padding-left: 13px;"></div>
-            <div class="form-group"><input class="form-control" type="text" name="lecture_subname" placeholder="부제목" value="${lecture_subname}"></div>
-            <div class="form-group"><textarea class="form-control" name="lecture_detail" placeholder="상세설명" rows="14" style="height: 260px;">${lecture_detail}</textarea></div>
+            <div class="form-group"><input class="form-control" type="text" name="lecture_subname" placeholder="부제목" value="${dto.lecture_subname}"></div>
+            <div class="form-group"><textarea class="form-control" name="lecture_detail" placeholder="상세설명" rows="14" style="height: 260px;">${dto.lecture_detail}</textarea></div>
             
             <!-- 추가된부분 -->
             <table>
@@ -52,11 +52,7 @@
             		<td><div class="form-group"> 최대 인원수 <input class="form-control" type="text" name="maxnum"></div></td>
             	</tr>
             </table>
-            <c:if test="${mode=='update' }">
-      			<input type="hidden" name="num" value="${dto.lecture_code}">
-      			<input type="hidden" name="page" value="${page}">
-      		<!-- 이 두개가 넘어오지 않으면 수정이 불가 -->
-      		</c:if>
+
             
             <div class="form-group"><button class="btn btn-secondary" type="button" style="background: #07689f;" onclick="sendOk();">${mode=='update'?'수정' :'등록신청'}&nbsp;</button></div>
             <div class="form-group"><button class="btn btn-secondary" type="button" style="background: #07689f;" onclick="javascript:location.href='${pageContext.request.contextPath}/regist_lecture/regist_teacher_lecturelist.do'">뒤로가기&nbsp;</button></div>

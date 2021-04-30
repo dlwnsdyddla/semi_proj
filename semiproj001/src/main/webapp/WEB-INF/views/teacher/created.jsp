@@ -58,7 +58,7 @@
             	</tr>
             </table>
             <c:if test="${mode=='update' }">
-      			<input type="hidden" name="num" value="${dto.lecture_code}">
+      			<input type="hidden" name="lecture_code" value="${dto.lecture_code}">
       			<input type="hidden" name="page" value="${page}">
       		<!-- 이 두개가 넘어오지 않으면 수정이 불가 -->
       		</c:if>

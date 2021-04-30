@@ -264,9 +264,9 @@ public class LectureDAO {
 		
 		try {
 			
-			sql ="update lecture set lecture_name=? lecture_subname=?"
+			sql ="update lecture set lecture_name=? ,lecture_subname=? "
 					+ " , lecture_detail=?"
-					+ " where teacher_id=?, lecture_code=?";
+					+ " where teacher_id=? AND lecture_code=?";
 			
 			pstmt = conn.prepareStatement(sql);
 			
@@ -275,6 +275,8 @@ public class LectureDAO {
 			pstmt.setString(3, dto.getLecture_detail());
 			pstmt.setString(4, id);
 			pstmt.setString(5, dto.getLecture_code());
+			
+			result= pstmt.executeUpdate();
 			
 		} catch (Exception e) {
 			e.printStackTrace();

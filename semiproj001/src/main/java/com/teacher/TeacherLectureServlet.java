@@ -190,7 +190,7 @@ public class TeacherLectureServlet extends HttpServlet{
 			dto.setLecture_detail(req.getParameter("lecutre_detail"));
 			dto.setTeacher_id(info.getId());
 			
-			dao.updateLecture(dto, page);
+			dao.updateLecture(dto, info.getId());
 			
 			
 			
