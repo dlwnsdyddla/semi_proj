@@ -76,6 +76,8 @@ public class ApprovedDAO {
 			pstmt.setString(1, admin_id);
 			pstmt.setString(2, opened_code);
 			result = pstmt.executeUpdate();
+			if(result!=0)
+				conn.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -89,6 +91,8 @@ public class ApprovedDAO {
 		try(PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setString(1, opened_code);
 			result = pstmt.executeUpdate();
+			if(result!=0)
+				conn.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
