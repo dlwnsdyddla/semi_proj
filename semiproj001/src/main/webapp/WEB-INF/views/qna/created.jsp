@@ -47,6 +47,11 @@
 				<h2 class="text-center">[커뮤니티]Q&A</h2>
 				<div class="form-group">
 					<input class="form-control" type="text" name="title"
+						placeholder="강의코드" value="${dto.qna_code}">
+				</div>
+				
+				<div class="form-group">
+					<input class="form-control" type="text" name="title"
 						placeholder="제목" value="${dto.question_title}">
 				</div>
 

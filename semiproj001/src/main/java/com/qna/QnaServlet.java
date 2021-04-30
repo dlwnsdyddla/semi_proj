@@ -42,6 +42,10 @@ public class QnaServlet extends HttpServlet{
 			article(req, resp);
 		} else if (uri.indexOf("qna_ok.do")!=-1) {
 			insertAnswer(req, resp);
+		} else if (uri.indexOf("created.do")!=-1) {
+			insertQuestionForm(req, resp);
+		} else if (uri.indexOf("created_ok.do")!=-1) {
+			questionSubmit(req, resp);
 		}
 	}
 	
@@ -98,9 +102,45 @@ public class QnaServlet extends HttpServlet{
 			
 		if(dao.insertAnswer(qna_code, dto) == 0) {
 			req.setAttribute("error", "답변 중 에러 발생");
+			resp.sendRedirect(cp+"/qna/list.do");
 		}
 		
 		article(req, resp);
+		
+	}
+	
+	protected void insertQuestionForm(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setAttribute("mode", "created");
+		forward(req, resp, "/WEB-INF/views/qna/created.jsp");
+		
+	}
+	
+	protected void questionSubmit(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String cp = req.getContextPath();
+		
+		HttpSession session = req.getSession();
+		Sessioninfo info= (Sessioninfo) session.getAttribute("member");
+		QnaDAO dao = new QnaDAO();
+		
+		
+		try {
+			QnaDTO dto = new QnaDTO();
+			
+			dto.setQuestion_id(info.getId());
+			
+			dto.setQna_code(req.getParameter("qna_code"));
+			dto.setQuestion_id(req.getParameter("question_id"));
+			dto.setQuestion_name(req.getParameter("question_name"));
+			dto.setQuestion_title(req.getParameter("question_title"));
+			dto.setQuestion_content(req.getParameter("question_content"));
+			
+			dao.insertQuestion(dto);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		resp.sendRedirect(cp+"/qna/list.do");
 		
 	}
 }
