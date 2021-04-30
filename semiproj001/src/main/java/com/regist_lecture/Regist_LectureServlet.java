@@ -145,7 +145,9 @@ public class Regist_LectureServlet extends HttpServlet{
 		
 		int offset = (current_page -1) *rows;
 		if(offset <0) offset =0; //ex ) 건너뛰기 10개씩
+		
 		List<Regist_LectureDTO> list =dao.teacher_lecturelist(offset, rows, name);
+		
 		String listUrl=cp+"/regist_lecture/teacherlist.do";
 		
 		

@@ -1,7 +1,7 @@
 package com.teacher;
 
 import java.io.IOException;
-
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 
 import com.member.Sessioninfo;
+import com.regist_lecture.Regist_LectureDAO;
 //import com.regist_lecture.Regist_LectureDAO;
 import com.regist_lecture.Regist_LectureDTO;
 
@@ -52,7 +53,7 @@ public class TeacherLectureServlet extends HttpServlet{
 		}		
 		
 		if(uri.indexOf("lecturelist.do")!=-1) {
-			article(req, resp);
+			list(req, resp);
 		}else if(uri.indexOf("created.do")!=-1) {
 				registLecture(req, resp);
 		} else if(uri.indexOf("created_ok.do")!=-1) {
@@ -109,12 +110,14 @@ public class TeacherLectureServlet extends HttpServlet{
 		
 	}
 	
-	protected void article(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void list(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		//글 보기
-		//Regist_LectureDAO dao = new Regist_LectureDAO();
+		Regist_LectureDAO dao = new Regist_LectureDAO();
 		String cp = req.getContextPath();
 		String page = req.getParameter("page");
 		String query = "page="+page;
+		//String name= dao.teacher_lecturelist(name);
+
 		try {
 			forward(req, resp, "/WEB-INF/views/regist_lecture/teacherlist.jsp");
 			return;
@@ -122,7 +125,14 @@ public class TeacherLectureServlet extends HttpServlet{
 			e.printStackTrace();
 		}
 		
-		resp.sendRedirect(cp+"/regist_lecture/list.do?"+query);
+		//게시글 가져오기
+		List<Regist_LectureDTO> list = null;
+		//list = dao.teacher_lecturelist()
+		
+		
+		
+		
+		resp.sendRedirect(cp+"/regist_lecture/teacherlist.jsp");
 		
 	}
 	
@@ -136,9 +146,9 @@ public class TeacherLectureServlet extends HttpServlet{
 		HttpSession session = req.getSession();
 		Sessioninfo info = (Sessioninfo)session.getAttribute("member");
 		String page = req.getParameter("page");		
-		
+		String lecture_code =req.getParameter("lecture_code");
+	
 		try {
-			String lecture_code =req.getParameter("lecture_code");
 			
 			Regist_LectureDTO dto= dao.readLecture(lecture_code);
 			
@@ -146,7 +156,7 @@ public class TeacherLectureServlet extends HttpServlet{
 				req.setAttribute("dto", dto);
 				req.setAttribute("mode", "update");
 				
-				forward(req, resp, "/WEB-INF/views/teacher/created.jsp");
+				forward(req, resp, "/WEB-INF/views/teacher/update.jsp");
 				return;
 
 			
@@ -160,7 +170,7 @@ public class TeacherLectureServlet extends HttpServlet{
 		}
 		
 		String cp= req.getContextPath();
-		resp.sendRedirect(cp+"/regist_lecture/regist_teacher_lecturelist.do");
+		resp.sendRedirect(cp+"/regist_lecture/regist_teacherlist.do");
 	}	
 	
 	
@@ -189,7 +199,8 @@ public class TeacherLectureServlet extends HttpServlet{
 		}
 		
 		String cp = req.getContextPath();
-		resp.sendRedirect(cp+"/teacher/lecturelist?page="+page);
+		resp.sendRedirect(cp+"/regist_lecture/regist_teacher_lecturelist.do");
+		
 		
 		
 	}	

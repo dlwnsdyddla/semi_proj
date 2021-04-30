@@ -13,17 +13,12 @@
 	function sendOk() {
 		var f= document.lectureSubmit;
 
-		f.action="${pageContext.request.contextPath}/teacher/created_ok.do";
+		f.action="${pageContext.request.contextPath}/teacher/update_ok.do";
 		
 		f.submit();
 	}
 	
-	function sendOk2() {
-		var f= document.lectureSubmit;
-		
-		
-		f.submit();
-	}
+
 </script>
 
 </head>
@@ -64,7 +59,7 @@
       		</c:if>
             
             <div class="form-group"><button class="btn btn-secondary" type="button" style="background: #07689f;" onclick="sendOk();">${mode=='update'?'수정' :'등록신청'}&nbsp;</button></div>
-            <div class="form-group"><button class="btn btn-secondary" type="button" style="background: #07689f;" onclick="javascript:location.href='${pageContext.request.contextPath}/regist_lecture/lecturelist.do'">뒤로가기&nbsp;</button></div>
+            <div class="form-group"><button class="btn btn-secondary" type="button" style="background: #07689f;" onclick="javascript:location.href='${pageContext.request.contextPath}/regist_lecture/regist_teacher_lecturelist.do'">뒤로가기&nbsp;</button></div>
         </form>
     </section>
 </div>

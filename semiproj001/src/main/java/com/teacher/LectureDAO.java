@@ -86,10 +86,10 @@ public class LectureDAO {
 		
 		try {
 			
-			sql="SELECT l.lecture_code, lecture_name, lecture_subname, lecture_detail, teacher_id, TO_CHAR(start_date, 'YY-MM-DD')start_date, TO_CHAR(end_date, 'YY-MM-DD')end_date, start_time, end_time, maxnum "
+			sql="SELECT l.lecture_code, l.lecture_name, l.lecture_subname, l.lecture_detail, teacher_id, TO_CHAR(start_date, 'YY-MM-DD')start_date, TO_CHAR(end_date, 'YY-MM-DD')end_date, start_time, end_time, maxnum "
 					+ " FROM lecture l "
 					+ " JOIN lecture_opened o ON l.lecture_code = o.lecture_code "
-					+ " WHERE lecture_code = ? ";			
+					+ " WHERE l.lecture_code = ? ";			
 			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, lecture_code);

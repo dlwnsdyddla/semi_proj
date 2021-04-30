@@ -172,7 +172,7 @@ public class Regist_LectureDAO {
 		
 		try {
 			
-			sql="select opened_code, lecture_code, lecture_name, lecture_subname, approved ,start_date, end_date, curnum, maxnum, "
+			sql="select opened_code, lecture_code, lecture_name, lecture_subname, approved ,to_char(start_date,'YY-MM-DD') start_date, to_char(end_date,'YY-MM-DD') end_date, curnum, maxnum, "
 					+ " teacher_name from lecture_list "
 					+ " WHERE teacher_name = ?";
 			
@@ -244,6 +244,7 @@ public class Regist_LectureDAO {
 			while(rs.next()) {
 				Regist_LectureDTO dto = new Regist_LectureDTO();
 				
+				dto.setOpened_code(rs.getString("opened_code"));
 				dto.setLecture_code(rs.getString("lecture_code"));
 				dto.setLecture_name(rs.getString("lecture_name"));
 				dto.setLecture_subname(rs.getString("lecture_subname"));
