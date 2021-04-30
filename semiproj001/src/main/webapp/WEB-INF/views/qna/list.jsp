@@ -66,8 +66,10 @@
 			</div>
 			
 			<div style="text-align: right; width: 85%; padding-top: 20px;">
+				<c:if test="${sessionScope.member.type == 's'}">
 				<button type="button" class="btn" style="background: #1F90A3; border: #1F90A3; color: white;"
 				onclick="javascript:location.href='${pageContext.request.contextPath}/qna/created.do';">질문달기</button>
+				</c:if>
 			</div>	
 			
 			<input type="hidden" name="student_id" value="${sessionScope.member.id}">

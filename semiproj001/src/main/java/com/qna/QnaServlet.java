@@ -34,7 +34,21 @@ public class QnaServlet extends HttpServlet{
 	protected void process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
 		String uri = req.getRequestURI();
+		String cp = req.getContextPath();
 		
+		HttpSession session = req.getSession();
+		Sessioninfo info = (Sessioninfo) session.getAttribute("member");
+		String type = null;
+		try {
+			type = info.getType();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		if(type==null || type.equals("d")) {
+			req.setAttribute("error", "비회원은 접근 불가");
+			resp.sendRedirect(cp+"/member/login.do");
+		}
 		
 		if(uri.indexOf("list.do")!=-1) {
 			list(req, resp);

@@ -58,7 +58,7 @@
 			</tr>
 			<tr height="35"
 				style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc; background: #cccccc;">
-				<td>${dto.question_title}</td>
+				<td style="padding-left: 5px;">${dto.question_title}</td>
 			</tr>
 			<tr height="35" style="border-bottom: 1px solid #cccccc;">
 				<td style="padding-left: 5px;">
@@ -76,7 +76,7 @@
 				style="width: 80%; margin: 40px auto 0px; border-spacing: 0px; border-collapse: collapse;">
 				<tr height="35"
 					style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc; background: #cccccc;">
-					<td>${dto.answer_title}</td>
+					<td style="padding-left: 5px;">${dto.answer_title}</td>
 				</tr>
 
 				<tr height="35" style="border-bottom: 1px solid #cccccc;">
