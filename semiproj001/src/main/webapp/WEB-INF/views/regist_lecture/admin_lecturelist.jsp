@@ -24,9 +24,11 @@
                 <h5 class="mb-1">${dto.lecture_name}</h5><small>신청현황 : ${dto.curnum}/${dto.maxnum}</small>
             </div>
             <p class="mb-1"  >${dto.teacher_name} 강사</p>
-            <p class="mb-1" style="font-size: 15px;">${dto.start_date} ~ ${dto.end_date}</p><small class="text-muted">${dto.lecture_subname}</small>
-    		 <button class="btn btn-primary float-right" type="button" style="margin-right: 23px;margin-top: 17px;margin-bottom: 0px;background: #07689f;">수강생조회</button> 
+            <p class="mb-1" style="font-size: 15px;">${dto.start_date} ~ ${dto.end_date}</p>
+            <small class="text-muted">${dto.lecture_subname}</small>
+        	<button class="btn btn-primary float-right" type="button" onclick="javascript:location.href='${pageContext.request.contextPath}/registered?opened_code=${dto.opened_code }';" style="margin-right: 10px;margin-top: 17px;margin-bottom: 0px;background: #07689f;">수강생 조회</button> 
         </div>
+        	
       </c:forEach>
      </div>  
 

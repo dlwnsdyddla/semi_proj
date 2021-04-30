@@ -47,7 +47,7 @@ public class RegisteredDAO {
 	
 	public String readLecture(String opened_code) {
 		String lecture=null;
-		String sql = "select lecture_name from lecture_student_registered "
+		String sql = "select lecture_name from lecture_detailed "
 				+ " where opened_code=?";
 		ResultSet rs = null;
 		try(PreparedStatement pstmt = conn.prepareStatement(sql)) {

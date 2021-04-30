@@ -28,14 +28,15 @@
             </form>
             <p class="mb-1">${dto.teacher_name} 강사</p>
             <p class="mb-1" style="font-size: 15px;">${dto.start_date} ~ ${dto.end_date}</p><small class="text-muted">${dto.lecture_subname}</small>
-    	  <button class="btn btn-primary float-right" type="button" style="margin-right: 23px;margin-top: 17px;margin-bottom: 0px;background: #07689f;">수강생조회</button>     
+        	<button class="btn btn-primary float-right" type="button" onclick="javascript:location.href='${pageContext.request.contextPath}/registered?opened_code=${dto.opened_code }';"  style="margin-right: 23px;margin-top: 17px;margin-bottom: 0px;background: #07689f;">수강생 조회</button> 
         </div>
-      <button class="btn btn-primary float-right" type="button" style="margin-right: 23px;margin-top: 17px;margin-bottom: 0px;background: #07689f;"onclick="javascript:location.href='${pageContext.request.contextPath}/teacher/update.do?lecture_code=${dto.lecture_code}&page=${page}';">강의수정하기</button>
+       		
 
-	
        </c:forEach>
       </div><button class="btn btn-primary float-right" type="button" style="margin-right: 23px;margin-top: 17px;margin-bottom: 0px;background: #07689f;"onclick="javascript:location.href='${pageContext.request.contextPath}/teacher/created.do';">강의등록하기</button>    
+      <button class="btn btn-primary float-right" type="button" style="margin-right: 23px;margin-top: 17px;margin-bottom: 0px;background: #07689f;"onclick="javascript:location.href='${pageContext.request.contextPath}/teacher/update.do?lecture_code=${dto.lecture_code}&page=${page}';">강의수정하기</button>    
 
+	
 		 
 <div class="footer">
     <jsp:include page="/WEB-INF/views/layout/footer.jsp"></jsp:include>
