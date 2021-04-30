@@ -67,7 +67,7 @@
 			
 			<div style="text-align: right; width: 85%; padding-top: 20px;">
 				<button type="button" class="btn" style="background: #1F90A3; border: #1F90A3; color: white;"
-				onclick="javascript:location.href='${pageContext.request.contextPath}/qna/created.do';">답변달기</button>
+				onclick="javascript:location.href='${pageContext.request.contextPath}/qna/created.do';">질문달기</button>
 			</div>	
 			
 			<input type="hidden" name="student_id" value="${sessionScope.member.id}">
