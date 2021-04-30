@@ -11,7 +11,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.member.Sessioninfo;
 import com.util.MyUtil;
 
 @WebServlet("/lectureList/*")
@@ -36,15 +38,26 @@ public class LectureListServlet extends HttpServlet {
 	protected void process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
 		String uri = req.getRequestURI();
-		
-		
+		HttpSession session = req.getSession();
+		String cp = req.getContextPath();
+		Sessioninfo info = (Sessioninfo) session.getAttribute("member");
+		String type = null;
+		try {
+			type = info.getType();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		if(uri.indexOf("lectureList.do")!=-1) {
 			list(req, resp);
 		} else if (uri.indexOf("lectureDetailed.do")!=-1) {
+			if(type == null)
+				resp.sendRedirect(cp+"/member/login.do");
 			lecture_detailed(req, resp);
 		} else if (uri.indexOf("register.do")!=-1) {
 			lecture_register(req, resp);
 		}
+		
+		
 	}
 	
 	protected void list(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

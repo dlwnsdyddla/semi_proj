@@ -38,7 +38,16 @@
 						<li class="nav-item"><a class="nav-link" href=" ${pageContext.request.contextPath}/plan/plan.do">교육일정</a></li>
 
 						<li class="nav-item"><a class="nav-link"
-							href="${pageContext.request.contextPath}/lectureList/lectureList.do">수강신청</a></li>
+							href="${pageContext.request.contextPath}/lectureList/lectureList.do">
+							<c:choose>
+								<c:when test="${sessionScope.member.type=='s'}">
+							수강신청
+								</c:when>
+								<c:when test="${sessionScope.member.type!='s'}">
+							강의목록
+								</c:when>
+							</c:choose>
+							</a></li>
 						<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/qna/list.do">커뮤니티</a></li>
 						<li class="nav-item dropdown"><a
 							class="dropdown-toggle nav-link" aria-expanded="false"
